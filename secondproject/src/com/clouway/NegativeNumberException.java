@@ -6,6 +6,6 @@ package com.clouway;
 public class NegativeNumberException extends Exception {
   public NegativeNumberException() {
     super("The number must be positive!");
-  }//asdddddd
+  }
 
-}//from computer
+}
