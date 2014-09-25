@@ -10,16 +10,17 @@ public class ArrayMain {
     Person person1 = new Person(6);
     Person person2 = new Person(8);
     Person person3 = new Person(12);
-      array.add(person);
-      array.add(person1);
-      array.add(person2);
-      //array.add(person3);
-    array.printAllElements();
-      array.remove();
-      array.remove();
-      array.remove();
-      //array.remove();
-      //array.remove();
+    Person person4 = new Person(17);
+    array.add(person);
+    array.add(person1);
+    array.add(person2);
+    array.add(person3);
+    //array.add(person4);
+    array.remove();
+    //array.remove();
+    //array.remove();
+    //array.remove();
+    //array.remove();
     array.printAllElements();
 
   }

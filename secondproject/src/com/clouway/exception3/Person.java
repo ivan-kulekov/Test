@@ -4,11 +4,12 @@ package com.clouway.exception3;
  * Created by clouway on 14-9-23.
  */
 public class Person {
-  int age;
+  private int age;
 
   public Person(int age) {
     this.age = age;
   }
+
 
   @Override
   public String toString() {

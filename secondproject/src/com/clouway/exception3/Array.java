@@ -4,7 +4,6 @@ package com.clouway.exception3;
  * Created by clouway on 14-9-23.
  */
 public class Array {
-  //private int x;
   private int index;
   Object[] array;
 
@@ -18,17 +17,17 @@ public class Array {
     if (index > 0) {
       for (Object obj : array) {
         if (obj != null) {
-          System.out.println(obj.toString());
+          System.out.println(obj);
         }
       }
-  }  //else {
-//      System.out.println("The array is empty!");
-//    }
+    } else {
+      System.out.println("The array is empty!");
+    }
   }
 
 
   public void add(Object obj) throws FullListException {
-    if (index == array.length - 1) {
+    if (index == array.length) {
       throw new FullListException();
     }
     array[index] = obj;
@@ -41,7 +40,7 @@ public class Array {
       throw new EmptyListException();
 
     }
-    array[index] = null;
     index--;
+    array[index] = null;
   }
 }

@@ -7,12 +7,11 @@ public class StringMain {
   public static void main(String[] args) throws NegativeNumberException {
     StringSum sum = new StringSum();
     try {
-      String c = sum.sum("-1", "14");
-      System.out.println("The sum of strings is: " + c);
-    }catch (NegativeNumberException e){
+      String s = sum.sum("1", "14");
+      System.out.println("The sum of strings is: " + s);
+    } catch (NegativeNumberException e) {
       System.out.println(e.toString());
-    }
-    catch (NumberFormatException e){
+    } catch (NumberFormatException e) {
       System.out.println(e.toString());
 
     }
