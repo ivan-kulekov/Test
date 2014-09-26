@@ -5,7 +5,7 @@ package com.clouway;
  */
 public class NegativeNumberException extends Exception {
   public NegativeNumberException() {
-    super("The number must be positive!");
+    super("The numbers must be positive!");
   }
 
 }
