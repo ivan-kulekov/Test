@@ -1,8 +1,16 @@
 package com.clouway.inputoutput.task2;
 
+<<<<<<< HEAD
 
 import java.io.FileWriter;
 import java.io.IOException;
+=======
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+>>>>>>> af2b8d6d0855b09b32c44e84ba0c05af042dfebc
 import java.util.Scanner;
 
 /**
