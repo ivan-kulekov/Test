@@ -9,13 +9,13 @@ import java.io.IOException;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class TextReverser {
-  public void reverse(String readfile, String writefile) throws IOException {
+  public void reverse(String inputFile, String outputFile) throws IOException {
     FileWriter fileWriter = null;
     BufferedReader fileReader = null;
 
     try {
-      fileWriter = new FileWriter(writefile);
-      fileReader = new BufferedReader(new FileReader(readfile));
+      fileWriter = new FileWriter(outputFile);
+      fileReader = new BufferedReader(new FileReader(inputFile));
       StringBuilder str = new StringBuilder();
       String c;
 

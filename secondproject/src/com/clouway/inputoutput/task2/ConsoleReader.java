@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Created by clouway on 14-9-26.
  */
-public class ConsoleReaderTextFile {
+public class ConsoleReader {
   private Scanner scanner = new Scanner(System.in);
 
   public void readTextFromConsole() throws IOException {
