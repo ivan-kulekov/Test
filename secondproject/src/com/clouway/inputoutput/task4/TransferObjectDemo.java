@@ -13,7 +13,8 @@ public class TransferObjectDemo {
     TransferObject transferObject = new TransferObject();
     FileInputStream fileInputStream = new FileInputStream("text4.txt");
     FileOutputStream fileOutputStream = new FileOutputStream("text5.txt");
-    transferObject.transfer(fileInputStream,fileOutputStream , 8, 0);
+    int output = transferObject.transfer(fileInputStream, fileOutputStream, -1, 0);
+    System.out.println(output + " Bytes are transferred");
 
   }
 }

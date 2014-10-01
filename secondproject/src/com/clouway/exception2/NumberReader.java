@@ -1,4 +1,5 @@
 package com.clouway.exception2;
+
 import java.util.Scanner;
 
 /**
@@ -6,7 +7,7 @@ import java.util.Scanner;
  */
 public class NumberReader {
 
- private Scanner scanner = new Scanner(System.in);
+  private Scanner scanner = new Scanner(System.in);
   int a = scanner.nextInt();
 
   public int readNumber() throws IncorrectNumberException {

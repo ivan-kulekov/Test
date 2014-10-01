@@ -16,21 +16,16 @@ public class TextReverser {
     try {
       fileWriter = new FileWriter(outputFile);
       fileReader = new BufferedReader(new FileReader(inputFile));
-      StringBuilder str = new StringBuilder();
+      StringBuilder container = new StringBuilder();
       String c;
 
       while ((c = fileReader.readLine()) != null) {
-        str.append("\n");
-        str.append(c);
-        str.reverse();
-        c = str.toString();
-        str.setLength(0);
-        System.out.println(c);
+        container.append("\n").append(c);
+        container.reverse();
+        c = container.toString();
+        container.setLength(0);
         fileWriter.write(c);
-
-
       }
-
     } finally {
       if (fileReader != null) {
         fileReader.close();
@@ -38,7 +33,6 @@ public class TextReverser {
       if (fileWriter != null) {
         fileWriter.close();
       }
-
     }
   }
 }
