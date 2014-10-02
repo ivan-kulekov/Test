@@ -1,9 +1,8 @@
-package com.clouway.inputoutput.Task6;
+package com.clouway.inputoutput.task6;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
