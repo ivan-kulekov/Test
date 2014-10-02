@@ -10,20 +10,18 @@ public class DirectoryBrowser{
     File file = new File(path);
     try {
       if (file.isFile()) {
-        System.out.println("You enter the path to file.");
-      }
-      for (File file1 : file.listFiles()) {
-        if (file1.isFile()) {
-          System.out.println(file1.getAbsolutePath() + " is a file");
-        } else {
+        System.out.println("You enter the path to file: "+file.getAbsolutePath());
+      }else{
+        for (File file1 : file.listFiles()) {
           System.out.println(file1.getAbsolutePath() + " is a directory");
           path = file1.getAbsolutePath();
           listContent(path);
         }
       }
+
     }catch (NullPointerException e){
       e.printStackTrace();
-      System.out.println("The name of file or directory is incorrect!");;
+      System.out.println("The name of file or directory is incorrect!");
     }
 
   }

@@ -11,8 +11,8 @@ public class ConsoleReader {
 
   public void readTextFromConsole() throws IOException {
     java.io.FileWriter fileWriter = null;
-    try {
 
+    try {
       fileWriter = new java.io.FileWriter("text.txt");
       String text;
       while (!(text = scanner.next()).equals(".")) {
@@ -20,7 +20,6 @@ public class ConsoleReader {
         fileWriter.write(text);
         fileWriter.write("\n");
       }
-
 
     } finally {
       if (fileWriter != null)
