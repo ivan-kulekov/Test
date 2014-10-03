@@ -13,9 +13,13 @@ public class DirectoryBrowser{
         System.out.println("You enter the path to file: "+file.getAbsolutePath());
       }else{
         for (File file1 : file.listFiles()) {
-          System.out.println(file1.getAbsolutePath() + " is a directory");
-          path = file1.getAbsolutePath();
-          listContent(path);
+          if(file1.isFile()){
+            System.out.println("You enter the path to file: "+file1.getAbsolutePath());
+          }else {
+            System.out.println(file1.getAbsolutePath() + " is a directory");
+            path = file1.getAbsolutePath();
+            listContent(path);
+          }
         }
       }
 

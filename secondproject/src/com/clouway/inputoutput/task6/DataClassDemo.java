@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
-public class DataClassMain {
+public class DataClassDemo {
   public static void main(String[] args) throws IOException, ClassNotFoundException {
     String file = "text6.ser";
     FileInputStream fileInputStream = new FileInputStream(file);

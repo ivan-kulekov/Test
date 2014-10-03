@@ -8,12 +8,13 @@ import java.io.OutputStream;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class TransferObject {
+  private static final int SIZE = 2048;
   public int transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException {
     int size;
     if (numberOfBytes >= 0) {
       size = numberOfBytes;
     } else {
-      size = 64;
+      size = SIZE;
     }
     byte[] buffer = new byte[size];
     int total = 0;
