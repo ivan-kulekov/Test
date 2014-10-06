@@ -1,4 +1,4 @@
-package com.clouway.exception2;
+package com.clouway.exceptions.task2;
 
 import java.util.Scanner;
 

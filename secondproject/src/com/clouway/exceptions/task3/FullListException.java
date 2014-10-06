@@ -1,4 +1,4 @@
-package com.clouway.exception3;
+package com.clouway.exceptions.task3;
 
 /**
  * Created by clouway on 14-9-24.

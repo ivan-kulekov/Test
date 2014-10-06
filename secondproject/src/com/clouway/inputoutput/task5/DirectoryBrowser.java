@@ -6,19 +6,18 @@ import java.io.File;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class DirectoryBrowser{
-  public void listContent(String path){
+  public String listContent(String path){
     File file = new File(path);
+    StringBuilder stringBuilder = new StringBuilder();
     try {
       if (file.isFile()) {
         System.out.println("You enter the path to file: "+file.getAbsolutePath());
       }else{
         for (File file1 : file.listFiles()) {
           if(file1.isFile()){
-            System.out.println("You enter the path to file: "+file1.getAbsolutePath());
+            stringBuilder.append(file1.getAbsolutePath()).append(" is a file").append("\n");
           }else {
-            System.out.println(file1.getAbsolutePath() + " is a directory");
-            path = file1.getAbsolutePath();
-            listContent(path);
+            stringBuilder.append(file1.getAbsolutePath()).append(" is a directory").append("\n");
           }
         }
       }
@@ -27,7 +26,7 @@ public class DirectoryBrowser{
       e.printStackTrace();
       System.out.println("The name of file or directory is incorrect!");
     }
-
+    return stringBuilder.toString();
   }
 
 }
