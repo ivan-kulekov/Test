@@ -8,8 +8,8 @@ import java.io.IOException;
 public class DirectoryBrowserDemo {
   public static void main(String[] args) throws IOException {
     DirectoryBrowser browser = new DirectoryBrowser();
-   String path = browser.listContent("/home/clouway/DirectoryBrowser/");
-    System.out.println(path);
+
+    System.out.println(browser.listContent("/home/clouway/DirectoryBrowser/"));
   }
 
 }

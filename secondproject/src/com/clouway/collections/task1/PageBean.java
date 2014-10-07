@@ -6,106 +6,106 @@ import java.util.List;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class PageBean {
-  //List list = new ArrayList();
-  private int pageSize = 3;
+  private int pageSize = 2;
   private int index = pageSize;
   private int start;
   private int counter = 0;
   private int difference;
   private int pageCounter = 0;
+  private int memory;
 
-  public void next(List list) {
-    String lastElement = (String) list.get(list.size() - 1);
-    int lastElement1 = Integer.parseInt(lastElement);
-    int x = index;
-    if (index > lastElement1) {
-      difference = index - lastElement1;
-      index = lastElement1;
+  public List next(List list) {
+    if (index > lastElement(list)) {
+      difference = index - lastElement(list);
+      index = lastElement(list);
     }
     List list1;
     list1 = list.subList(start, index);
-    System.out.println("next " + list1);
-    if (index == lastElement1) {
+    if (index == lastElement(list)) {
       index += difference;
     }
     start += pageSize;
     index += pageSize;
     counter++;
     pageCounter++;
-    System.out.println(x);
+    return list1;
   }
 
-  public void previous(List list) {
-    List list1;
-//    System.out.println(start);
-//    System.out.println(index);
+  public List previous(List list) {
     if (counter > 0) {
       start -= pageSize;
       index -= pageSize;
     }
-
     start -= pageSize;
     index -= pageSize;
-    list1 = list.subList(start, index);
-    System.out.println("previous " + list1);
     counter = 0;
     pageCounter--;
+    return list.subList(start, index);
 
   }
 
-  public void hasNext(List list) {
-    index -= pageSize;
-    if (index < list.size()) {
-      System.out.println("has next");
+  public String hasNext(List list) {
+    String result;
+    if (index <= list.size() + 1 && memory < list.size()) {
+      result = "has next";
     } else {
-      System.out.println("hasn't next");
+      result = "hasn't next";
     }
-    index += pageSize;
+    return result;
   }
 
-  public void hasPrevious(List list) {
-//    System.out.println(start);
-
-    if (start < pageSize) {
-      System.out.println("hasn't previous");
+  public String hasPrevious() {
+    String result;
+    if (start <= pageSize) {
+      result = "hasn't previous";
     } else {
-      System.out.println("has previous");
+      result = "has previous";
     }
+    return result;
   }
 
-  public void firstPage(List list) {
-    index = pageSize;
-    start = 0;
-    System.out.println("first page " + list.subList(start, index));
+  public List firstPage(List list) {
+    int index = pageSize;
+    int start = 0;
     pageCounter = 1;
+    return list.subList(start, index);
   }
 
-  public void lastPage(List list) {
-    int x = index;
-    int y = start;
-    System.out.println(difference);
-//    System.out.println(list.size());
-//    System.out.println(start);
-//    System.out.println(index);
-//    System.out.println();
-    index = list.size();
-    if(difference>0) {
-      start = list.size() - pageSize + difference;
-    }else{
-      start = list.size() - 1;
-    }
-//    System.out.println(start);
-//    System.out.println(index);
-    System.out.println("last page " + list.subList(start, index));
+  public List lastPage(List list) {
+    int index1;
+    int start1;
+    index1 = list.size();
+    memory = index;
     if (list.size() % pageSize > 0) {
-      pageCounter = (list.size() / pageSize) + (list.size() % pageSize);
+      start1 = list.size() - list.size() % pageSize;
+    } else {
+      start1 = list.size() - pageSize;
     }
-    index = x;
-    start = y;
+    pageCounter(list);
+    return list.subList(start1, index1);
   }
 
-  public void getCurrentPageNumber(List list) {
-    System.out.println("You are on page: " + pageCounter);
+  public int getCurrentPageNumber() {
+    return pageCounter;
   }
 
+  private int lastElement(List list) {
+    String lastElement = (String) list.get(list.size() - 1);
+    return Integer.parseInt(lastElement);
+  }
+
+  private int pageCounter(List list) {
+    int value;
+    if (list.size() % pageSize < pageSize) {
+      value = 1;
+    } else {
+      value = list.size() % pageSize;
+    }
+    if (list.size() % pageSize > 0) {
+      pageCounter = (list.size() / pageSize) + value;
+    } else {
+      pageCounter = list.size() / pageSize;
+    }
+    return pageCounter;
+  }
 }
