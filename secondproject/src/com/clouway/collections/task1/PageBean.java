@@ -6,15 +6,21 @@ import java.util.List;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class PageBean {
-  private int pageSize = 2;
-  private int index = pageSize;
+  private int pageSize;
+  private int index = pageSize = 2;
   private int start;
-  private int counter = 0;
+  private int counternext = 0;
+  private int counterprevious = 0;
   private int difference;
   private int pageCounter = 0;
   private int memory;
 
   public List next(List list) {
+
+    if (counterprevious > 0) {
+      start += pageSize;
+      index += pageSize;
+    }
     if (index > lastElement(list)) {
       difference = index - lastElement(list);
       index = lastElement(list);
@@ -26,31 +32,38 @@ public class PageBean {
     }
     start += pageSize;
     index += pageSize;
-    counter++;
+    counternext++;
     pageCounter++;
     return list1;
+
+
   }
 
   public List previous(List list) {
-    if (counter > 0) {
+    if (counternext > 0) {
       start -= pageSize;
       index -= pageSize;
     }
     start -= pageSize;
     index -= pageSize;
-    counter = 0;
+    counternext = 0;
     pageCounter--;
+    counterprevious++;
     return list.subList(start, index);
 
   }
 
   public String hasNext(List list) {
     String result;
-    if (index <= list.size() + 1 && memory < list.size()) {
+    if (counternext > 0) {
+      index -= pageSize;
+    }
+    if (index < list.size() && memory < list.size()) {
       result = "has next";
     } else {
       result = "hasn't next";
     }
+    index += pageSize;
     return result;
   }
 
@@ -65,10 +78,12 @@ public class PageBean {
   }
 
   public List firstPage(List list) {
-    int index = pageSize;
-    int start = 0;
+    int index1 = pageSize;
+    int start1 = 0;
     pageCounter = 1;
-    return list.subList(start, index);
+    index += pageSize;
+    start += pageSize;
+    return list.subList(start1, index1);
   }
 
   public List lastPage(List list) {
@@ -82,6 +97,12 @@ public class PageBean {
       start1 = list.size() - pageSize;
     }
     pageCounter(list);
+    index = index1;
+    start = start1;
+    if (counternext > 0) {
+      index+=pageSize;
+      start+=pageSize;
+    }
     return list.subList(start1, index1);
   }
 
@@ -90,8 +111,7 @@ public class PageBean {
   }
 
   private int lastElement(List list) {
-    String lastElement = (String) list.get(list.size() - 1);
-    return Integer.parseInt(lastElement);
+    return (Integer) list.get(list.size() - 1);
   }
 
   private int pageCounter(List list) {
@@ -108,4 +128,5 @@ public class PageBean {
     }
     return pageCounter;
   }
+
 }

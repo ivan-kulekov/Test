@@ -9,6 +9,7 @@ import java.io.OutputStream;
  */
 public class TransferObject {
   private static final int SIZE = 2048;
+
   public int transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException {
     int size;
     if (numberOfBytes >= 0) {
