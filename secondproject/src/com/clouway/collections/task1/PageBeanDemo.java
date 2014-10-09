@@ -9,7 +9,7 @@ import java.util.List;
 public class PageBeanDemo {
   public static void main(String[] args) {
     List<Integer> list = new ArrayList<Integer>();
-    PageBean pageBean = new PageBean();
+    PageBean pageBean = new PageBean(list, 2);
     list.add(1);
     list.add(2);
     list.add(3);
@@ -22,17 +22,17 @@ public class PageBeanDemo {
     list.add(10);
 //    list.add(11);
 
-    System.out.println("First page is: " + pageBean.firstPage(list));
+    System.out.println("First page is: " + pageBean.firstPage());
 
-    System.out.println("Next page: " + pageBean.next(list));
+    System.out.println("Next page: " + pageBean.next());
 
     System.out.println(pageBean.hasPrevious());
 
-    System.out.println(pageBean.hasNext(list));
+    System.out.println(pageBean.hasNext());
 
-    System.out.println("Previous page: " + pageBean.previous(list));
+    System.out.println("Previous page: " + pageBean.previous());
 
-    System.out.println("Last page: " + pageBean.lastPage(list));
+    System.out.println("Last page: " + pageBean.lastPage());
 
     System.out.println(pageBean.getCurrentPageNumber());
   }

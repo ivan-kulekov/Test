@@ -7,17 +7,22 @@ import java.util.Hashtable;
  */
 public class ExceptionsMessageManager {
 
+  Hashtable<String, String> exceptions = new Hashtable<String, String>();
 
-  public String registerErrorMessage(String messageCode, String message, Hashtable<String, String> exceptions) {
+  public ExceptionsMessageManager(Hashtable<String, String> exceptions) {
+    this.exceptions = exceptions;
+  }
+
+  public String registerErrorMessage(String messageCode, String message) {
     if (exceptions.containsValue(message)) {
       throw new IllegalArgumentException("There is a value with that message!");
     } else {
       exceptions.put(messageCode, message);
-      return "The new key: '" + messageCode + "' and value: '" + message + "' are inserted to hash table.";
+      return "The new key: '" + messageCode + "' with value: '" + message + "' are inserted to hash table.";
     }
   }
 
-  public String raiseError(String messageCode, Hashtable<String, String> exceptions) {
+  public String raiseError(String messageCode) {
     if (!(exceptions.containsKey(messageCode))) {
       throw new IllegalArgumentException("The key is not correct, please enter correct key.");
     } else {
@@ -25,7 +30,7 @@ public class ExceptionsMessageManager {
     }
   }
 
-  public String getErrorMessages(Hashtable<String, String> exceptions) {
+  public String getErrorMessages() {
     return "The all error messages are: " + exceptions.values();
   }
 

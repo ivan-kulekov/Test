@@ -1,5 +1,6 @@
 package com.clouway.collections.task1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,17 +8,23 @@ import java.util.List;
  */
 public class PageBean {
   private int pageSize;
-  private int index = pageSize = 2;
+  private int index;
   private int start;
-  private int counternext = 0;
-  private int counterprevious = 0;
+  private int counterNext = 0;
+  private int counterPrevious = 0;
   private int difference;
   private int pageCounter = 0;
   private int memory;
+  private List<Integer> list = new ArrayList<Integer>();
 
-  public List next(List list) {
+  public PageBean(List<Integer> list, int pageSize) {
+    this.list = list;
+    this.pageSize = pageSize;
+    this.index = pageSize;
+  }
 
-    if (counterprevious > 0) {
+  public List next() {
+    if (counterPrevious > 0) {
       start += pageSize;
       index += pageSize;
     }
@@ -32,30 +39,28 @@ public class PageBean {
     }
     start += pageSize;
     index += pageSize;
-    counternext++;
+    counterNext++;
     pageCounter++;
     return list1;
-
-
   }
 
-  public List previous(List list) {
-    if (counternext > 0) {
+  public List previous() {
+    if (counterNext > 0) {
       start -= pageSize;
       index -= pageSize;
     }
     start -= pageSize;
     index -= pageSize;
-    counternext = 0;
+    counterNext = 0;
     pageCounter--;
-    counterprevious++;
+    counterPrevious++;
     return list.subList(start, index);
 
   }
 
-  public String hasNext(List list) {
+  public String hasNext() {
     String result;
-    if (counternext > 0) {
+    if (counterNext > 0) {
       index -= pageSize;
     }
     if (index < list.size() && memory < list.size()) {
@@ -77,7 +82,7 @@ public class PageBean {
     return result;
   }
 
-  public List firstPage(List list) {
+  public List firstPage() {
     int index1 = pageSize;
     int start1 = 0;
     pageCounter = 1;
@@ -86,7 +91,7 @@ public class PageBean {
     return list.subList(start1, index1);
   }
 
-  public List lastPage(List list) {
+  public List lastPage() {
     int index1;
     int start1;
     index1 = list.size();
@@ -96,10 +101,10 @@ public class PageBean {
     } else {
       start1 = list.size() - pageSize;
     }
-    pageCounter(list);
+    pageCounter();
     index = index1;
     start = start1;
-    if (counternext > 0) {
+    if (counterNext > 0) {
       index+=pageSize;
       start+=pageSize;
     }
@@ -114,7 +119,7 @@ public class PageBean {
     return (Integer) list.get(list.size() - 1);
   }
 
-  private int pageCounter(List list) {
+  private int pageCounter() {
     int value;
     if (list.size() % pageSize < pageSize) {
       value = 1;
