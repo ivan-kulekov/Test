@@ -14,7 +14,6 @@ public class PageBean {
   private int counterPrevious = 0;
   private int difference;
   private int pageCounter = 0;
-  private int memory;
   private List<Integer> list = new ArrayList<Integer>();
 
   public PageBean(List<Integer> list, int pageSize) {
@@ -24,57 +23,60 @@ public class PageBean {
   }
 
   public List next() {
-    if (counterPrevious > 0) {
+    try {
+      if (counterPrevious > 0) {
+        start += pageSize;
+        index += pageSize;
+      }
+      if (index > list.size()) {
+        difference = index - list.size();
+        index = list.size();
+      }
+      List list1;
+      list1 = list.subList(start, index);
+      index += difference;
       start += pageSize;
       index += pageSize;
+      counterNext++;
+      pageCounter++;
+      return list1;
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
     }
-    if (index > lastElement(list)) {
-      difference = index - lastElement(list);
-      index = lastElement(list);
-    }
-    List list1;
-    list1 = list.subList(start, index);
-    if (index == lastElement(list)) {
-      index += difference;
-    }
-    start += pageSize;
-    index += pageSize;
-    counterNext++;
-    pageCounter++;
-    return list1;
+    return null;
   }
 
   public List previous() {
-    if (counterNext > 0) {
+    try {
+      if (counterNext > 0) {
+        start -= pageSize;
+        index -= pageSize;
+      }
       start -= pageSize;
       index -= pageSize;
+      counterNext = 0;
+      pageCounter--;
+      counterPrevious++;
+      return list.subList(start, index);
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
     }
-    start -= pageSize;
-    index -= pageSize;
-    counterNext = 0;
-    pageCounter--;
-    counterPrevious++;
-    return list.subList(start, index);
-
+    return null;
   }
 
   public String hasNext() {
     String result;
-    if (counterNext > 0) {
-      index -= pageSize;
-    }
-    if (index < list.size() && memory < list.size()) {
-      result = "has next";
-    } else {
+    if(pageCounter >= findLastPage()){
       result = "hasn't next";
+    }else{
+      result= "has next";
     }
-    index += pageSize;
     return result;
   }
 
   public String hasPrevious() {
     String result;
-    if (start <= pageSize) {
+    if (pageCounter <= 1) {
       result = "hasn't previous";
     } else {
       result = "has previous";
@@ -94,19 +96,20 @@ public class PageBean {
   public List lastPage() {
     int index1;
     int start1;
+    int diff = 0;
     index1 = list.size();
-    memory = index;
     if (list.size() % pageSize > 0) {
       start1 = list.size() - list.size() % pageSize;
+      diff+=pageSize-list.size()%pageSize;
     } else {
       start1 = list.size() - pageSize;
     }
-    pageCounter();
-    index = index1;
+    findLastPage();
+    index = index1+diff;
     start = start1;
     if (counterNext > 0) {
-      index+=pageSize;
-      start+=pageSize;
+      index += pageSize;
+      start += pageSize;
     }
     return list.subList(start1, index1);
   }
@@ -119,7 +122,7 @@ public class PageBean {
     return (Integer) list.get(list.size() - 1);
   }
 
-  private int pageCounter() {
+  private int findLastPage() {
     int value;
     if (list.size() % pageSize < pageSize) {
       value = 1;
@@ -135,3 +138,38 @@ public class PageBean {
   }
 
 }
+//  public List next() {
+//    if (counterPrevious > 0) {
+//      start += pageSize;
+//      index += pageSize;
+//    }
+//    if (index > lastElement(list)) {
+//      difference = index - lastElement(list);
+//      index = lastElement(list);
+//    }
+//    List list1;
+//    list1 = list.subList(start, index);
+//    if (index == lastElement(list)) {
+//      index += difference;
+//    }
+//    start += pageSize;
+//    index += pageSize;
+//    counterNext++;
+//    pageCounter++;
+//    return list1;
+//  }
+
+//  public String hasNext() {
+//    String result;
+//    if (counterNext > 0) {
+//      index -= pageSize;
+//    }
+//    if (index < list.size() && memory < list.size()) {
+//      result = "has next";
+//    } else {
+//      result = "hasn't next";
+//    }
+//    index += pageSize;
+//    return result;
+//  }
+
