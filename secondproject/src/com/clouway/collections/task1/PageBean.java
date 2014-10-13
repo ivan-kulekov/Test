@@ -118,9 +118,6 @@ public class PageBean {
     return pageCounter;
   }
 
-  private int lastElement(List list) {
-    return (Integer) list.get(list.size() - 1);
-  }
 
   private int findLastPage() {
     int value;
@@ -173,3 +170,6 @@ public class PageBean {
 //    return result;
 //  }
 
+//  private int lastElement(List list) {
+//    return (Integer) list.get(list.size() - 1);
+//  }
