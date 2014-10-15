@@ -22,21 +22,29 @@ public class PageBeanDemo {
     list.add(10);
     list.add(11);
 
-    System.out.println("First page is: " + pageBean.firstPage());
-
+//    System.out.println("First page is: " + pageBean.firstPage());
+//
+//    System.out.println("Next page: " + pageBean.next());
+//
+//    System.out.println("Previous page: " + pageBean.previous());
+//
+//    System.out.println("Previous page: " + pageBean.previous());
+//
+//    System.out.println("Next page: " + pageBean.next());
+//
+//    System.out.println("First page: " + pageBean.firstPage());
+//
+//    System.out.println("Previous page: " + pageBean.previous());
+//
+//    System.out.println("Last page: " + pageBean.lastPage());
+//
+    System.out.println("Next page: " + pageBean.next());
+    System.out.println("Next page: " + pageBean.next());
+    System.out.println("Next page: " + pageBean.next());
     System.out.println("Next page: " + pageBean.next());
 
-    System.out.println("Next page: " + pageBean.next());
 
-    System.out.println("Previous page: " + pageBean.previous());
-
-    System.out.println(pageBean.hasPrevious());
-
-    System.out.println(pageBean.hasNext());
-
-    System.out.println("Last page: " + pageBean.lastPage());
-
-    System.out.println(pageBean.getCurrentPageNumber());
+//    System.out.println(pageBean.getCurrentPageNumber());
 
   }
 }

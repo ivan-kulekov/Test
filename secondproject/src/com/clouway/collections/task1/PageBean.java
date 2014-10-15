@@ -23,27 +23,28 @@ public class PageBean {
   }
 
   public List next() {
-    try {
+
       if (counterPrevious > 0) {
         start += pageSize;
         index += pageSize;
       }
-      if (index > list.size()) {
-        difference = index - list.size();
-        index = list.size();
-      }
-      List list1;
-      list1 = list.subList(start, index);
+    if (index > list.size()) {
+      difference = index - list.size();
+      index = list.size();
+    }
+    List list1;
+    if(start>list.size() | index>list.size()){
+      start -= pageSize;
+      index -= pageSize;
+      throw new IllegalArgumentException("There is no next page!");
+    }
+    list1 = list.subList(start, index);
       index += difference;
       start += pageSize;
       index += pageSize;
       counterNext++;
       pageCounter++;
       return list1;
-    } catch (IllegalArgumentException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   public List previous() {
