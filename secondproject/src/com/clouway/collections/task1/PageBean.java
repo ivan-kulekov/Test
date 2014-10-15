@@ -28,17 +28,16 @@ public class PageBean {
         start += pageSize;
         index += pageSize;
       }
+
     if (index > list.size()) {
       difference = index - list.size();
       index = list.size();
     }
-    List list1;
-    if(start>list.size() | index>list.size()){
-      start -= pageSize;
-      index -= pageSize;
-      throw new IllegalArgumentException("There is no next page!");
+    if(!hasNext()){
+        throw new IllegalArgumentException("There is no next page!");
     }
-    list1 = list.subList(start, index);
+      List list1;
+      list1 = list.subList(start, index);
       index += difference;
       start += pageSize;
       index += pageSize;
@@ -48,10 +47,12 @@ public class PageBean {
   }
 
   public List previous() {
-    try {
       if (counterNext > 0) {
         start -= pageSize;
         index -= pageSize;
+      }
+      if(!hasPrevious()){
+          throw new IllegalArgumentException("There is no previous page!");
       }
       start -= pageSize;
       index -= pageSize;
@@ -59,28 +60,26 @@ public class PageBean {
       pageCounter--;
       counterPrevious++;
       return list.subList(start, index);
-    } catch (IllegalArgumentException e) {
-      e.printStackTrace();
-    }
-    return null;
+
   }
 
-  public String hasNext() {
-    String result;
+  public Boolean hasNext() {
+    Boolean result;
+
     if(pageCounter >= findLastPage()){
-      result = "hasn't next";
+      result = false;
     }else{
-      result= "has next";
+      result= true;
     }
     return result;
   }
 
-  public String hasPrevious() {
-    String result;
+  public Boolean hasPrevious() {
+    Boolean result;
     if (pageCounter <= 1) {
-      result = "hasn't previous";
+      result = false;
     } else {
-      result = "has previous";
+      result = true;
     }
     return result;
   }
@@ -105,13 +104,12 @@ public class PageBean {
     } else {
       start1 = list.size() - pageSize;
     }
-    findLastPage();
     index = index1+diff;
     start = start1;
     if (counterNext > 0) {
       index += pageSize;
       start += pageSize;
-    }
+    }pageCounter = findLastPage();
     return list.subList(start1, index1);
   }
 
@@ -120,20 +118,14 @@ public class PageBean {
   }
 
 
-  private int findLastPage() {
-    int value;
-    if (list.size() % pageSize < pageSize) {
-      value = 1;
-    } else {
-      value = list.size() % pageSize;
+
+    private int findLastPage(){
+        int x = list.size()/pageSize;
+        if(list.size()%pageSize>0){
+            x++;
+        }
+        return x;
     }
-    if (list.size() % pageSize > 0) {
-      pageCounter = (list.size() / pageSize) + value;
-    } else {
-      pageCounter = list.size() / pageSize;
-    }
-    return pageCounter;
-  }
 
 }
 //  public List next() {
@@ -173,4 +165,19 @@ public class PageBean {
 
 //  private int lastElement(List list) {
 //    return (Integer) list.get(list.size() - 1);
+//  }
+
+//  private int findLastPage() {
+//    int value;
+//    if (list.size() % pageSize < pageSize) {
+//      value = 1;
+//    } else {
+//      value = list.size() % pageSize;
+//    }
+//    if (list.size() % pageSize > 0) {
+//      pageCounter = (list.size() / pageSize) + value;
+//    } else {
+//      pageCounter = list.size() / pageSize;
+//    }
+//    return pageCounter;
 //  }

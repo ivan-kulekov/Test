@@ -12,7 +12,7 @@ import java.util.Map;
 public class ExceptionsMessageManager {
 
   private Map<String, String> exceptions = new HashMap<String, String>();
-  private StringBuilder builder = new StringBuilder();
+  private List<String> list = new ArrayList<String>();
 
 
 
@@ -28,11 +28,11 @@ public class ExceptionsMessageManager {
     if (!(exceptions.containsKey(messageCode))) {
       throw new IllegalArgumentException("The error is not correct, please enter correct error.");
     }
-    builder.append(exceptions.get(messageCode)).append("\n");
+        list.add(exceptions.get(messageCode));
   }
 
-  public String getErrorMessages() {
-    return builder.toString();
+  public List<String> getErrorMessages() {
+      return list;
   }
 
 }
