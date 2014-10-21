@@ -43,17 +43,20 @@ public class Array {
     int sum = 0;
     for (int i : array) {
       sum += i;
-
     }
     return sum;
 
   }
 
-  public void printArray(int[] array) {
-    System.out.print("The array is: ");
+  public String printArray(int[] array) {
+    StringBuilder stringBuilder = new StringBuilder();
+//    System.out.print("The array is: ");
     for (int i : array) {
-      System.out.print(i + " ");
+      stringBuilder.append(i);
+      stringBuilder.append(" ");
+//      System.out.print(i + " ");
     }
+    return stringBuilder.toString();
 
   }
 

@@ -1,8 +1,5 @@
 package com.clouway.collections.task2;
 
-
-import java.util.Hashtable;
-
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
@@ -16,7 +13,7 @@ public class ExceptionsMessageManagerDemo {
 
     messageManager.registerErrorMessage("error3", "Invalid post code!");
 
-    messageManager.registerErrorMessage("error5", "Invalid name!");
+    messageManager.registerErrorMessage("error4", "Invalid name!");
     messageManager.raiseError("error1");
     messageManager.raiseError("error2");
     messageManager.raiseError("error3");

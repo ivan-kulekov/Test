@@ -3,7 +3,6 @@ package com.clouway.collections.task2;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 /**
