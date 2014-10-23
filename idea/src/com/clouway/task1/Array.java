@@ -29,13 +29,17 @@ public class Array {
   }
 
   public int getMinElement(int[] array) {
-    int minElement = array[0];
-    for (int i = 1; i < array.length; i++) {
-      if (array[i] < minElement) {
-        minElement = array[i];
+    try {
+      int minElement = array[0];
+      for (int i = 1; i < array.length; i++) {
+        if (array[i] < minElement) {
+          minElement = array[i];
+        }
       }
+      return minElement;
+    }catch (ArrayIndexOutOfBoundsException e){
+      throw new InvalidInputException();
     }
-    return minElement;
 
   }
 

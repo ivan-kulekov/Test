@@ -1,4 +1,5 @@
 import com.clouway.task1.Array;
+import com.clouway.task1.InvalidInputException;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -25,12 +26,11 @@ public class TestArray {
 
   }
 
-  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  @Test(expected = InvalidInputException.class)
   public void getMinElementNull() throws Exception {
     int[] arr = {};
     Array array = new Array();
-    int x = array.getMinElement(arr);
-    assertThat(x, is(0));
+    array.getMinElement(arr);
   }
 
   @Test
@@ -76,6 +76,7 @@ public class TestArray {
 
   }
 
+
   @Test
   public void getSumNegative() throws Exception {
     int[] arr = {-2, -10, -20, -30};
@@ -102,12 +103,10 @@ public class TestArray {
 
   }
 
-  @Test
+  @Test(expected = NullPointerException.class)
   public void printArrayNull() throws Exception {
-    int[] arr = {};
     Array array = new Array();
-    String s = array.printArray(arr);
-    assertThat(s, is(""));
+    array.printArray(null);
 
   }
 }

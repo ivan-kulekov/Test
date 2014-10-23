@@ -1,6 +1,7 @@
 package com.clouway.task2;
 
-import javax.management.BadStringOperationException;
+import com.clouway.InvalidInputException;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -17,22 +18,27 @@ public class Sumator {
   }
 
   public String sum(String a, String b) {
+    if(a == "" | b == ""){
+      throw new IllegalArgumentException();
+    }
+    try {
       int x = Integer.parseInt(a);
       int y = Integer.parseInt(b);
       int sum = x + y;
       return Integer.toString(sum);
+    }catch (NumberFormatException e){
+      throw new InvalidInputException();
+    }
   }
 
   public BigInteger sum(BigInteger a, BigInteger b) {
-    BigInteger sum = a.add(b);
 
-    return sum;
+    return a.add(b);
 
   }
 
   public BigDecimal sum(BigDecimal a, BigDecimal b) {
-    BigDecimal sum = a.add(b);
 
-    return sum;
+    return a.add(b);
   }
 }

@@ -1,3 +1,4 @@
+import com.clouway.InvalidInputException;
 import com.clouway.task2.Sumator;
 import org.junit.Test;
 
@@ -25,28 +26,39 @@ public class TestSumator {
 
   }
 
-  @Test(expected = NumberFormatException.class)
+  @Test
+  public void sumNegativeNumbers() throws Exception {
+    Sumator sumator = new Sumator();
+    String x = sumator.sum("-11", "-29");
+    int y = Integer.parseInt(x);
+    assertThat(y, is (-40));
+
+  }
+
+  @Test(expected = InvalidInputException.class)
   public void invalidInput() throws Exception {
     Sumator sumator = new Sumator();
-    String x = sumator.sum("5a", "6");
-    int y = Integer.parseInt(x);
-    assertThat(y, is (11));
+    sumator.sum("5safsdghdfsghfg", "6");
   }
 
-  @Test(expected = NumberFormatException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void inputNull() throws Exception {
     Sumator sumator = new Sumator();
-    String x = sumator.sum("", "");
-    int y = Integer.parseInt(x);
-    assertThat(y, is (11));
+    sumator.sum("","");
+
   }
 
-  @Test(expected = NumberFormatException.class)
-  public void maxInteger() throws Exception {
+  @Test(expected = InvalidInputException.class)
+  public void maxPositive() throws Exception {
     Sumator sumator = new Sumator();
-    String x = sumator.sum("21374836477", "2");
-    int y = Integer.parseInt(x);
-    assertThat(y, is (2137483647));
+    sumator.sum("223748345637357567456477", "2");
+
+  }
+
+  @Test(expected = InvalidInputException.class)
+  public void maxNegative() throws Exception {
+    Sumator sumator = new Sumator();
+    sumator.sum("-223748364745645673577", "2");
 
   }
 }
