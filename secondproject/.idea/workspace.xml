@@ -23,33 +23,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ShopTest2.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ShopTest2.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/ShopTest2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="773" max-vertical-offset="1320">
-              <caret line="78" column="49" selection-start-line="78" selection-start-column="49" selection-end-line="78" selection-end-column="49" />
+            <state vertical-scroll-proportion="-1.0164272" vertical-offset="765" max-vertical-offset="1935">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#525#526#0" expanded="true" />
-                <element signature="e#553#554#0" expanded="true" />
-                <element signature="e#992#993#0" expanded="true" />
-                <element signature="e#1022#1023#0" expanded="true" />
+                <element signature="e#650#651#0" expanded="true" />
+                <element signature="e#678#679#0" expanded="true" />
+                <element signature="e#1117#1118#0" expanded="true" />
+                <element signature="e#1147#1148#0" expanded="true" />
+                <element signature="e#2514#2515#0" expanded="true" />
+                <element signature="e#2575#2576#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Shop2.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Shop2.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/clouway/test/shop/Shop2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0924025" vertical-offset="128" max-vertical-offset="900">
-              <caret line="44" column="1" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="293" max-vertical-offset="1065">
+              <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#350#367#0" expanded="true" />
                 <element signature="e#419#427#0" expanded="true" />
-                <element signature="e#1289#1290#0" expanded="true" />
-                <element signature="e#1315#1316#0" expanded="true" />
+                <element signature="e#469#470#0" expanded="true" />
+                <element signature="e#495#496#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,7 +60,7 @@
       <file leaf-file-name="Product.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/clouway/test/shop/Product.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="23" max-vertical-offset="510">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
               <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
               <folding>
                 <element signature="e#385#386#0" expanded="true" />
@@ -128,11 +130,11 @@
         <option value="$PROJECT_DIR$/src/com/clouway/test/shop/Shop.java" />
         <option value="$PROJECT_DIR$/test/ShopTest.java" />
         <option value="$PROJECT_DIR$/src/com/clouway/test/shop/product.java" />
-        <option value="$PROJECT_DIR$/src/com/clouway/test/shop/AddMoreThanMaxQuantityException.java" />
         <option value="$PROJECT_DIR$/src/com/clouway/test/shop/ProductNotFoundException.java" />
         <option value="$PROJECT_DIR$/src/com/clouway/test/shop/Product.java" />
-        <option value="$PROJECT_DIR$/test/ShopTest2.java" />
+        <option value="$PROJECT_DIR$/src/com/clouway/test/shop/AddMoreThanMaxQuantityException.java" />
         <option value="$PROJECT_DIR$/src/com/clouway/test/shop/Shop2.java" />
+        <option value="$PROJECT_DIR$/test/ShopTest2.java" />
       </list>
     </option>
   </component>
@@ -413,13 +415,13 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="ShopTest2.addQuantityToProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ShopTest2.addProductMoreQuantityThanMaxQuantity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="secondproject" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ShopTest2" />
-      <option name="METHOD_NAME" value="addQuantityToProduct" />
+      <option name="METHOD_NAME" value="addProductMoreQuantityThanMaxQuantity" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -435,13 +437,13 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="ShopTest2.sellNotExistingProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ShopTest2.addMoreQuantityThanMaxQuantity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="secondproject" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ShopTest2" />
-      <option name="METHOD_NAME" value="sellNotExistingProduct" />
+      <option name="METHOD_NAME" value="addMoreQuantityThanMaxQuantity" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -457,13 +459,13 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="ShopTest2.addProductAndSellNotExistingProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ShopTest2.sellMoreThanWeHave" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="secondproject" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ShopTest2" />
-      <option name="METHOD_NAME" value="addProductAndSellNotExistingProduct" />
+      <option name="METHOD_NAME" value="sellMoreThanWeHave" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -479,13 +481,13 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="ShopTest2.sortByPrice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ShopTest2.sellMoreThanWeHaveWithAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="secondproject" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ShopTest2" />
-      <option name="METHOD_NAME" value="sortByPrice" />
+      <option name="METHOD_NAME" value="sellMoreThanWeHaveWithAdd" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -632,18 +634,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.ShopTest2" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ShopTest2.addQuantityToProduct" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ShopTest2.sellNotExistingProduct" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.ShopTest2.addProductAndSellNotExistingProduct" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ShopTest2.sortByPrice" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ShopTest2.addProductMoreQuantityThanMaxQuantity" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ShopTest2.addMoreQuantityThanMaxQuantity" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ShopTest2.sellMoreThanWeHave" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ShopTest2.sellMoreThanWeHaveWithAdd" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.ShopTest2" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ShopTest2.sortByPrice" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ShopTest2.addProductAndSellNotExistingProduct" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.ShopTest2.addQuantityToProduct" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ShopTest2.sellNotExistingProduct" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ShopTest2.sellMoreThanWeHaveWithAdd" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ShopTest2.sellMoreThanWeHave" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ShopTest2.addMoreQuantityThanMaxQuantity" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ShopTest2.addProductMoreQuantityThanMaxQuantity" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -685,7 +687,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1535" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -705,7 +707,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25720027" sideWeight="0.80237156" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32279316" sideWeight="0.4996651" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32279316" sideWeight="0.4996651" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1078,21 +1080,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/clouway/test/shop/AddMoreThanMaxQuantityException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14344262" vertical-offset="0" max-vertical-offset="732">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-          <folding>
-            <element signature="e#214#215#0" expanded="true" />
-            <element signature="e#277#278#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/clouway/test/shop/ProductNotFoundException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18480493" vertical-offset="0" max-vertical-offset="487">
           <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/clouway/test/shop/AddMoreThanMaxQuantityException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18480493" vertical-offset="0" max-vertical-offset="487">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1112,30 +1111,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/ShopTest2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="773" max-vertical-offset="1320">
-          <caret line="78" column="49" selection-start-line="78" selection-start-column="49" selection-end-line="78" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#525#526#0" expanded="true" />
-            <element signature="e#553#554#0" expanded="true" />
-            <element signature="e#992#993#0" expanded="true" />
-            <element signature="e#1022#1023#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/clouway/test/shop/Shop2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0924025" vertical-offset="128" max-vertical-offset="900">
-          <caret line="44" column="1" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="293" max-vertical-offset="1065">
+          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#350#367#0" expanded="true" />
             <element signature="e#419#427#0" expanded="true" />
-            <element signature="e#1289#1290#0" expanded="true" />
-            <element signature="e#1315#1316#0" expanded="true" />
+            <element signature="e#469#470#0" expanded="true" />
+            <element signature="e#495#496#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ShopTest2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0164272" vertical-offset="765" max-vertical-offset="1935">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#678#679#0" expanded="true" />
+            <element signature="e#1117#1118#0" expanded="true" />
+            <element signature="e#1147#1148#0" expanded="true" />
+            <element signature="e#2514#2515#0" expanded="true" />
+            <element signature="e#2575#2576#0" expanded="true" />
           </folding>
         </state>
       </provider>
