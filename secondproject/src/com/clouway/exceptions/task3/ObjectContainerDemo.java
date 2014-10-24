@@ -14,8 +14,8 @@ public class ObjectContainerDemo {
     array.add(person);
     array.add(person1);
     array.add(person2);
-    //array.add(person3);
-    //array.add(person4);
+    //array.addProduct(person3);
+    //array.addProduct(person4);
     //array.remove();
     //array.remove();
     //array.remove();

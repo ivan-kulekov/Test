@@ -5,6 +5,5 @@ package com.clouway.test.shop;
  */
 public class ProductNotFoundException extends RuntimeException {
   public ProductNotFoundException(){
-    super("Can't sell not existing product!");
   }
 }
