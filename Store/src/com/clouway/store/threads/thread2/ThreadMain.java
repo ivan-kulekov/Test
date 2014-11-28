@@ -5,11 +5,11 @@ package com.clouway.store.threads.thread2;
  */
 public class ThreadMain {
   public static void main(String[] args) {
-      CounterThread t1 = new CounterThread(4);
-      CounterThread t2 = new CounterThread(5000);
+    ThreadCounter t1 = new ThreadCounter(2000);
+    ThreadCounter t2 = new ThreadCounter(1500);
 
-    t1.setThread(t2);
-    t2.setThread(t1);
+    t1.notice(t2);
+    t2.notice(t1);
 
     t1.start();
     t2.start();

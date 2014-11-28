@@ -25,21 +25,24 @@ public class ServiceTest {
   @Rule
   public JUnitRuleMockery context = new JUnitRuleMockery();
 
-  @Mock Validator validator;
-  @Mock DataBase dataBase;
+  @Mock
+  Validator validator;
+  @Mock
+  DataBase dataBase;
 
 
-    @Before
-  public void setUp(){
+  @Before
+  public void setUp() {
     service = new Service(validator, dataBase);
   }
 
 
   @Test
-  public void addToDataBase(){
-   final Person user = new Person("Ivan", "29");
-    context.checking(new Expectations(){{
-      oneOf(validator).isValid(user); will(returnValue(true));
+  public void addToDataBase() {
+    final Person user = new Person("Ivan", "29");
+    context.checking(new Expectations() {{
+      oneOf(validator).isValid(user);
+      will(returnValue(true));
       oneOf(dataBase).addToDb(user);
     }});
 
@@ -47,31 +50,36 @@ public class ServiceTest {
   }
 
   @Test
-  public void notAddToDataBaseIfInvalid(){
+  public void notAddToDataBaseIfInvalid() {
     final Person user = new Person("Ivan", "129");
-    context.checking(new Expectations(){{
-      oneOf(validator).isValid(user); will(returnValue(false));
+    context.checking(new Expectations() {{
+      oneOf(validator).isValid(user);
+      will(returnValue(false));
     }});
 
     service.addUser(user);
   }
-  
+
   @Test
-  public void getAgeIfIsAdult(){
+  public void getAgeIfIsAdult() {
     final Person user = new Person("Ivan", "25");
-    context.checking(new Expectations(){{
-      oneOf(dataBase).getUserAge(user); will(returnValue(user.getAge()));
-      oneOf(validator).isAdult(user.getAge()); will(returnValue(true));
+    context.checking(new Expectations() {{
+      oneOf(dataBase).getUserAge(user);
+      will(returnValue(user.getAge()));
+      oneOf(validator).isAdult(user.getAge());
+      will(returnValue(true));
     }});
     assertThat(service.getUser(user), is(true));
   }
 
   @Test
-  public void getAgeIfUserIsNotAdult(){
+  public void getAgeIfUserIsNotAdult() {
     final Person user = new Person("Ivan", "12");
-    context.checking(new Expectations(){{
-      oneOf(dataBase).getUserAge(user); will(returnValue(user.getAge()));
-      oneOf(validator).isAdult(user.getAge()); will(returnValue(false));
+    context.checking(new Expectations() {{
+      oneOf(dataBase).getUserAge(user);
+      will(returnValue(user.getAge()));
+      oneOf(validator).isAdult(user.getAge());
+      will(returnValue(false));
     }});
     assertThat(service.getUser(user), is(false));
   }
