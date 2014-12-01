@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
-public class Threads extends Thread {
+public class ThreadRemover extends Thread {
   private int counterStop;
   private boolean reset;
   private final String key;
@@ -14,7 +14,7 @@ public class Threads extends Thread {
   long startTime = System.nanoTime();
   private boolean isRemoved;
 
-  public Threads(int counterStop, String key, Object value, Map<String, Object> timeOutHashTable) {
+  public ThreadRemover(int counterStop, String key, Object value, Map<String, Object> timeOutHashTable) {
     this.counterStop = counterStop;
     this.key = key;
     this.value = value;

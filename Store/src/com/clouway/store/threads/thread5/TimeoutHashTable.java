@@ -10,7 +10,7 @@ public class TimeoutHashTable {
   private int counter;
   private int timeOut;
   private Map<String, Object> timeOutHashTable = new Hashtable<String, Object>();
-  Threads threads;
+  ThreadRemover thread;
 
 
   public TimeoutHashTable(int timeOut) {
@@ -18,14 +18,14 @@ public class TimeoutHashTable {
   }
 
   public synchronized void put(String key, Object value) {
-    threads = new Threads(timeOut, key, value, timeOutHashTable);
+    thread = new ThreadRemover(timeOut, key, value, timeOutHashTable);
 //    if (timeOutHashTable.containsKey(key)) {
-//      threads.reset();
+//      thread.reset();
 //      counter++;
 //    }
     timeOutHashTable.put(key, value);
     System.out.println(timeOutHashTable.size());
-    threads.start();
+    thread.start();
   }
 
   public String remove(String key) {
@@ -33,7 +33,7 @@ public class TimeoutHashTable {
       return null;
     }
     timeOutHashTable.remove(key);
-    threads.isRemoved();
+    thread.isRemoved();
     return "Remove - Done!";
   }
 
@@ -42,7 +42,7 @@ public class TimeoutHashTable {
       System.out.println("get NOT done!");
       return null;
     }
-    threads.reset();
+    thread.reset();
     timeOutHashTable.get(key);
     System.out.println("get done");
     return "Get - Done!";
