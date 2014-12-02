@@ -5,4 +5,7 @@ package com.clouway.store.learngui;
  */
 public interface CalculatorListener {
   void numberPressed(String text);
+  void operatorPressed(String text);
+
+  void findResult();
 }

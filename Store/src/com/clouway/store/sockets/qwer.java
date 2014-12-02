@@ -1,4 +1,4 @@
-package com.clouway.store.learngui;
+package com.clouway.store.sockets;
 
 import java.io.IOException;
 import java.net.Socket;
