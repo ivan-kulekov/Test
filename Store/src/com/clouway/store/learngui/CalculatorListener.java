@@ -7,12 +7,11 @@ public interface CalculatorListener {
   void numberPressed(String text);
   void operatorPressed(String text);
 
-  int findResult();
+  double findResult();
 
   void clearAll();
 
   void clear();
 
-
-  void decimalPressed(String s);
+  void decimalPressed(String dot);
 }

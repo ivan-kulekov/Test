@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class CalculatorUI extends JFrame implements Display {
-  //  private JPanel panel1;
   private JTextField textField = new JTextField(15);
   private JButton buttonDecimal = new JButton(".");
   private JButton buttonEqual = new JButton("=");
@@ -34,14 +33,11 @@ public class CalculatorUI extends JFrame implements Display {
     operatorListener(calculatorListener);
     equalListener(calculatorListener);
     clearAllListener(calculatorListener);
-    ActionListener clearListener = new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        calculatorListener.clear();
-      }
-    };
-    buttonClear.addActionListener(clearListener);
+    clearListener(calculatorListener);
+    decimalListener(calculatorListener);
   }
+
+
 
 
   @Override
@@ -119,6 +115,26 @@ public class CalculatorUI extends JFrame implements Display {
       }
     };
     buttonClearAll.addActionListener(clearAllListener);
+  }
+
+  private void clearListener(final CalculatorListener calculatorListener) {
+    ActionListener clearListener = new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        calculatorListener.clear();
+      }
+    };
+    buttonClear.addActionListener(clearListener);
+  }
+
+  private void decimalListener(final CalculatorListener calculatorListener) {
+    ActionListener decimalListener = new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        calculatorListener.decimalPressed(buttonDecimal.getText());
+      }
+    };
+    buttonDecimal.addActionListener(decimalListener);
   }
 
 }

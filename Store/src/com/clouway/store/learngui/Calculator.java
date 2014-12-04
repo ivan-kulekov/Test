@@ -5,16 +5,13 @@ package com.clouway.store.learngui;
  */
 public class Calculator implements CalculatorListener {
   private String currentDisplay = "";
-  private int left;
-  private int right;
+  private double left;
+  private double right;
   private String operator = "";
-  private int result = 0;
+  private double result = 0;
   private String tempValueLeft = "";
   private String tempValueRight = "";
   private boolean isOperatorUsed;
-  private int counter;
-  private boolean isNullUsed;
-  private char[] array;
 
   private final Display display;
 
@@ -23,16 +20,23 @@ public class Calculator implements CalculatorListener {
   }
 
   public void numberPressed(String number) {
+    currentDisplay += number;
     if (operator.equals("")) {
       tempValueLeft += number;
-      left = Integer.parseInt(tempValueLeft);
+      try {
+        left = Double.parseDouble(tempValueLeft);
+      }catch (NumberFormatException e){
+        currentDisplay = "Error";
+      }
     } else {
       tempValueRight += number;
-      right = Integer.parseInt(tempValueRight);
+      try {
+        right = Double.parseDouble(tempValueRight);
+      }catch (NumberFormatException e){
+        currentDisplay = "Error";
+      }
     }
-    currentDisplay += number;
     display.displayText(currentDisplay);
-    counter++;
   }
 
   @Override
@@ -46,7 +50,7 @@ public class Calculator implements CalculatorListener {
   }
 
   @Override
-  public int findResult() {
+  public double findResult() {
     if (operator.equals("+")) {
       result = left + right;
     }
@@ -87,9 +91,16 @@ public class Calculator implements CalculatorListener {
   }
 
   @Override
-  public void decimalPressed(String s) {
-
+  public void decimalPressed(String dot) {
+    if (tempValueRight.equals("")){
+      tempValueLeft += ".";
+    }else {
+      tempValueRight += ".";
+    }
+    currentDisplay += ".";
+    display.displayText(currentDisplay);
   }
+
 
   private void resetValues() {
     currentDisplay = "";
@@ -98,6 +109,5 @@ public class Calculator implements CalculatorListener {
     tempValueRight = "";
     left = 0;
     right = 0;
-    counter = 0;
   }
 }
