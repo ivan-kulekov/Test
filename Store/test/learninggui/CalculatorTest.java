@@ -293,6 +293,26 @@ public class CalculatorTest {
     calculator.clear();
     assertThat(calculator.findResult(), is(31.0));
   }
+  
+  @Test
+  public void pressClearMoreThanNecessary(){
+    context.checking(new Expectations() {{
+      oneOf(display).displayText("3");
+      oneOf(display).displayText("30");
+      oneOf(display).displayText("305");
+      oneOf(display).displayText("30");
+      oneOf(display).displayText("3");
+      oneOf(display).displayText("");
+      oneOf(display).displayText("");
+    }});
+    calculator.numberPressed("3");
+    calculator.numberPressed("0");
+    calculator.numberPressed("5");
+    calculator.clear();
+    calculator.clear();
+    calculator.clear();
+    calculator.clear();
+  }
 
 //  @Test
 //  public void pressButton0MoreThanOnceAtBeginning(){
@@ -327,5 +347,34 @@ public class CalculatorTest {
     calculator.decimalPressed(".");
     calculator.numberPressed("5");
     assertThat(calculator.findResult(), is(4.7));
+  }
+
+  @Test
+  public void decimalInvalidInput(){
+    context.checking(new Expectations() {{
+      oneOf(display).displayText("3");
+      oneOf(display).displayText("3.");
+      oneOf(display).displayText("3..");
+      oneOf(display).displayText("Error");
+
+    }});
+    calculator.numberPressed("3");
+    calculator.decimalPressed(".");
+    calculator.decimalPressed(".");
+    calculator.numberPressed("2");
+  }
+
+  @Test
+  public void pushClearButtonToChangeTheOperator(){
+   context.checking(new Expectations(){{
+     oneOf(display).displayText("3");
+     oneOf(display).displayText("3+");
+     oneOf(display).displayText("3");
+     oneOf(display).displayText("3-");
+   }});
+    calculator.numberPressed("3");
+    calculator.operatorPressed("+");
+    calculator.clear();
+    calculator.operatorPressed("-");
   }
 }

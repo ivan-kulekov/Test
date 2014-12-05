@@ -38,8 +38,6 @@ public class CalculatorUI extends JFrame implements Display {
   }
 
 
-
-
   @Override
   public void displayText(String text) {
     textField.setText(text);
@@ -81,7 +79,7 @@ public class CalculatorUI extends JFrame implements Display {
       public void actionPerformed(ActionEvent e) {
         for (JButton operator : operators) {
           if (e.getSource() == operator) {
-              calculatorListener.operatorPressed(operator.getText());
+            calculatorListener.operatorPressed(operator.getText());
           }
         }
       }
