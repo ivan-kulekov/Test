@@ -17,7 +17,7 @@ public class Methods {
     }
     System.out.println(Thread.currentThread().getName() + " - " + value);
     valueSet = false;
-    notify();
+    notifyAll();
   }
 
   public synchronized void put(int value){
@@ -31,6 +31,6 @@ public class Methods {
     this.value = value;
     valueSet = true;
     System.out.println(Thread.currentThread().getName() + " - " + value);
-    notify();
+    notifyAll();
   }
 }

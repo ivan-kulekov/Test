@@ -1,7 +1,7 @@
 package learninggui;
 
-import com.clouway.store.learngui.Calculator;
-import com.clouway.store.learngui.Display;
+import com.clouway.store.learngui.calculator.Calculator;
+import com.clouway.store.learngui.calculator.Display;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
