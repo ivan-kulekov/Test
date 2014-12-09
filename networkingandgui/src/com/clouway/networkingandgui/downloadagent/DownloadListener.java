@@ -11,4 +11,7 @@ public interface DownloadListener {
   public int transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException;
   public int getTransferredBytes();
   public void isDead();
+  public boolean startDownload(String urlName, String downloadedFileName);
+  public int getForProgressBar();
+
 }

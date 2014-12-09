@@ -19,17 +19,9 @@ public class DownloadAgentTest {
   @Test
   public void downloadPicture() {
     TransferObject transferObject = new TransferObject();
-    try {
-      URL url = new URL("http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg");
-      URLConnection connection = url.openConnection();
-      InputStream in = connection.getInputStream();
-      FileOutputStream outputStream = new FileOutputStream("asd.jpg");
-      transferObject.transfer(in, outputStream, -1, 0);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }//catch (MalformedURLException e) {
-    // e.printStackTrace();
-    // }
+      String urlName = "http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg";
+      String fileName = "asd.jpg";
+      transferObject.startDownload(urlName, fileName);
     assertThat(transferObject.getTransferredBytes(), is(121403));
   }
 
@@ -50,5 +42,13 @@ public class DownloadAgentTest {
 //    assertThat(transferObject.getTransferredBytes(), is(5242880));
 //  }
 
+  @Test
+  public void noUrlDownload() {
+    TransferObject transferObject = new TransferObject();
+    String urlName = "";
+    String downloadedFileName = "asdf.jpg";
+    transferObject.startDownload(urlName, downloadedFileName);
+    assertThat(transferObject.getTransferredBytes(), is(0));
+  }
 
 }

@@ -4,22 +4,25 @@ import javax.swing.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class DownloadThread extends Thread {
   private DownloadListener downloadListener;
-  private InputStream in;
-  private FileOutputStream outputStream;
+  private final String urlName;
+  private final String downloadedFileName;
+
   private boolean isDead;
 
 
 
-  public DownloadThread(DownloadListener downloadListener, InputStream in, FileOutputStream outputStream) {
+  public DownloadThread(DownloadListener downloadListener, String urlName, String downloadedFileName) {
     this.downloadListener = downloadListener;
-    this.in = in;
-    this.outputStream = outputStream;
+    this.urlName = urlName;
+    this.downloadedFileName = downloadedFileName;
   }
 
   public boolean isDead() {
@@ -28,12 +31,7 @@ public class DownloadThread extends Thread {
 
   public void run() {
     while (!isDead) {
-      try {
-       downloadListener.transfer(in, outputStream, -1, 0);
-
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+      downloadListener.startDownload(urlName, downloadedFileName);
       isDead = true;
     }
   }

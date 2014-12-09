@@ -5,8 +5,8 @@ package com.clouway.networkingandgui.downloadagent;
  */
 public class DownloadAgentMain {
   public static void main(String[] args) {
-    DownloadAgentUI downloadAgent = new DownloadAgentUI();
-    TransferObject transfer = new TransferObject();
+    DownloadAgentView downloadAgent = new DownloadAgentView();
+    DownloadListener transfer = new TransferObject();
     downloadAgent.initFrame(transfer);
   }
 }
