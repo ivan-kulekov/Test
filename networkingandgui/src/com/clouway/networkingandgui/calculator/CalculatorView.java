@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
-public class CalculatorUI extends JFrame implements Display {
+public class CalculatorView extends JFrame implements Display {
   private JTextField textField = new JTextField(15);
   private JButton buttonDecimal = new JButton(".");
   private JButton buttonEqual = new JButton("=");

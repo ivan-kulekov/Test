@@ -13,43 +13,14 @@ import java.net.URLConnection;
 public class TransferObject implements DownloadListener {
   private static final int SIZE = 2048;
   private int total = 0;
-  private boolean isDead;
-  private int forProgressBar;
+  private boolean isInterrupted;
+  private int forProgressBar = 0;
+  private boolean isErrorOccurred;
 
 
   @Override
-  public int transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException {
-    int size;
-    total = 0;
-    isDead = false;
-
-    if (numberOfBytes >= 0) {
-      size = numberOfBytes;
-    } else {
-      size = SIZE;
-    }
-
-    byte[] buffer = new byte[size];
-    in.skip(offset);
-    int readBytes;
-    while ((readBytes = in.read(buffer)) != -1) {
-      total += readBytes;
-      out.write(buffer, 0, readBytes);
-      if (numberOfBytes == readBytes || isDead) {
-        break;
-      }
-    }
-    return total;
-  }
-
-  @Override
-  public int getTransferredBytes() {
-    return total;
-  }
-
-  @Override
-  public void isDead() {
-    isDead = true;
+  public void isInterrupted() {
+    isInterrupted = true;
   }
 
   @Override
@@ -63,16 +34,47 @@ public class TransferObject implements DownloadListener {
       forProgressBar = connection.getContentLength();
       InputStream in = connection.getInputStream();
       FileOutputStream outputStream = new FileOutputStream(downloadedFileName);
-//      progressBar.setMaximum(connection.getContentLength());
-      transfer(in, outputStream, -1, 0);
+      if (!isErrorOccurred){
+        transfer(in, outputStream, -1, 0);
+        return true;
+      }
     } catch (IOException e) {
-      e.printStackTrace();
+      isErrorOccurred = true;
     }
-    return true;
+    return false;
+  }
+
+  @Override
+  public int getTransferredBytes() {
+    return total;
   }
 
   @Override
   public int getForProgressBar() {
     return forProgressBar;
+  }
+
+  private int transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException {
+    int size;
+    total = 0;
+    isInterrupted = false;
+
+    if (numberOfBytes >= 0) {
+      size = numberOfBytes;
+    } else {
+      size = SIZE;
+    }
+
+    byte[] buffer = new byte[size];
+    in.skip(offset);
+    int readBytes;
+    while ((readBytes = in.read(buffer)) != -1) {
+      total += readBytes;
+      out.write(buffer, 0, readBytes);
+      if (numberOfBytes == readBytes || isInterrupted) {
+        break;
+      }
+    }
+    return total;
   }
 }

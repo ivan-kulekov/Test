@@ -5,8 +5,8 @@ package com.clouway.networkingandgui.calculator;
  */
 public class Main {
   public static void main(String[] args) {
-    CalculatorUI calculatorUI = new CalculatorUI();
-    Calculator calculator = new Calculator(calculatorUI);
-    calculatorUI.initFrame(calculator);
+    CalculatorView calculatorView = new CalculatorView();
+    Calculator calculator = new Calculator(calculatorView);
+    calculatorView.initFrame(calculator);
   }
 }

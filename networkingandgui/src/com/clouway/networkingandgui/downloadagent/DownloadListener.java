@@ -8,9 +8,8 @@ import java.io.OutputStream;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public interface DownloadListener {
-  public int transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException;
   public int getTransferredBytes();
-  public void isDead();
+  public void isInterrupted();
   public boolean startDownload(String urlName, String downloadedFileName);
   public int getForProgressBar();
 
