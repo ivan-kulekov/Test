@@ -17,12 +17,19 @@ public class TwoCounters extends Thread {
 
   public void run(){
     for (int i = 1; i <= counterStop; i++){
+
       if (isInterrupted()){
-        System.out.println("finished");
+        System.out.println(getName() +  " finished second!");
         break;
       }
-      System.out.println(i);
+      System.out.println(getName() + " : " + i);
+      try {
+        sleep(500);
+      } catch (InterruptedException e) {
+        interrupt();
+      }
     }
+
     thread.interrupt();
   }
 }

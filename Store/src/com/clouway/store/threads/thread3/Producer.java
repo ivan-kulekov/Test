@@ -15,7 +15,7 @@ public class Producer implements Runnable {
   public void run() {
 
     for (int i = 0; i <= counterStop; i++) {
-      methods.put(i);
+      methods.count(i);
     }
   }
 }

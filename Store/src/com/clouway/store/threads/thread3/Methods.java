@@ -7,7 +7,7 @@ public class Methods {
   private boolean valueSet;
   private int value;
 
-  public synchronized void get(){
+  public synchronized void waitThenCount(){
     if (!valueSet){
       try {
         wait();
@@ -20,7 +20,7 @@ public class Methods {
     notifyAll();
   }
 
-  public synchronized void put(int value){
+  public synchronized void count(int value){
     if (valueSet){
       try {
         wait();

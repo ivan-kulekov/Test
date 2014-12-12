@@ -35,8 +35,11 @@ public class SafeSecurityTest {
   public void openSafeDoor() {
     final Person person = new Person("Ivan", 123456789);
     context.checking(new Expectations(){{
-      oneOf(fingerScanner).scanFinger(person);will(returnValue(person.getBiometricData()));
-      oneOf(dataBase).checkInDb(person.getBiometricData());will(returnValue(true));
+      oneOf(fingerScanner).scanFinger(person);
+      will(returnValue(person.getBiometricData()));
+
+      oneOf(dataBase).checkInDb(person.getBiometricData());
+      will(returnValue(true));
     }});
     safe.checkPerson(person);
     assertThat(safe.openDoor(), is(true));
@@ -46,11 +49,27 @@ public class SafeSecurityTest {
   public void notOpenSafeDoorIfInvalidBiometricData(){
     final Person person = new Person("Georgi", 987654321);
     context.checking(new Expectations(){{
-      oneOf(fingerScanner).scanFinger(person);will(returnValue(person.getBiometricData()));
-      oneOf(dataBase).checkInDb(person.getBiometricData());will(returnValue(false));
+      oneOf(fingerScanner).scanFinger(person);
+      will(returnValue(person.getBiometricData()));
+
+      oneOf(dataBase).checkInDb(person.getBiometricData());
+      will(returnValue(false));
     }});
     safe.checkPerson(person);
     assertThat(safe.openDoor(), is(false));
   }
 
+  @Test
+  public void cannotGetBiometricData(){
+    final Person person = new Person("Georgi", 987654321);
+    context.checking(new Expectations(){{
+      never(fingerScanner).scanFinger(person);
+      will(returnValue(person.getBiometricData()));
+
+      never(dataBase).checkInDb(person.getBiometricData());
+      will(returnValue(false));
+
+    }});
+    assertThat(safe.openDoor(), is(false));
+  }
 }

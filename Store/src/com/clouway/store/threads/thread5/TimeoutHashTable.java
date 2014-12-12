@@ -17,15 +17,20 @@ public class TimeoutHashTable {
     this.timeOut = timeOut;
   }
 
-  public synchronized void put(String key, Object value) {
-    thread = new TimeoutRemover(timeOut, key, value, timeOutHashTable);
+  public void put(String key, Object value) {
+    if (!timeOutHashTable.containsKey(key)){
+      thread = new TimeoutRemover(timeOut, key, value, timeOutHashTable);
+      thread.start();
+    }
+    thread.reset();
+//      System.out.println("asd");
+
 //    if (timeOutHashTable.containsKey(key)) {
 //      thread.reset();
 //      counter++;
 //    }
     timeOutHashTable.put(key, value);
     System.out.println("Size of TimeoutHashTable is: " + timeOutHashTable.size());
-    thread.start();
   }
 
   public String remove(String key) {
@@ -44,7 +49,7 @@ public class TimeoutHashTable {
     }
     thread.reset();
     timeOutHashTable.get(key);
-    System.out.println("get done");
+    System.out.println("get done" + timeOutHashTable.get(key));
     return "Get - Done!";
   }
 }

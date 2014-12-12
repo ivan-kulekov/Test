@@ -24,11 +24,12 @@ public class TimeoutRemover extends Thread {
   public void run() {
     int counter = counterStop;
     for (int i = 0; i < counterStop; i++) {
-      if (!timeOutHashTable.containsKey(key) && !isRemoved) {
-        timeOutHashTable.put(key, value);
-      }
+//      if (!timeOutHashTable.containsKey(key) && !isRemoved) {
+//        timeOutHashTable.put(key, value);
+//      }
+//      System.out.println(reset +"asd");
       if (reset) {
-        counterStop += counter - i;
+        counterStop += counter - i -1;
         reset = false;
       }
       try {
@@ -42,6 +43,7 @@ public class TimeoutRemover extends Thread {
     long duration = endTime - startTime;
     System.out.println(Thread.currentThread().getName() + " Time " + duration);
   }
+
 
   public void reset() {
     reset = true;
