@@ -25,7 +25,7 @@ public class TransferObject implements DownloadListener {
 
   @Override
   public boolean startDownload(String urlName, String downloadedFileName) {
-    if (urlName.equals("") || downloadedFileName.equals("")){
+    if (urlName.equals("") || downloadedFileName.equals("")) {
       return false;
     }
     try {
@@ -34,7 +34,7 @@ public class TransferObject implements DownloadListener {
       forProgressBar = connection.getContentLength();
       InputStream in = connection.getInputStream();
       FileOutputStream outputStream = new FileOutputStream(downloadedFileName);
-      if (!isErrorOccurred){
+      if (!isErrorOccurred) {
         transfer(in, outputStream, -1, 0);
         return true;
       }

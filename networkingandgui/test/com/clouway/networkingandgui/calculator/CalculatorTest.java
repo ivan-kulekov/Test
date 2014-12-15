@@ -33,18 +33,18 @@ public class CalculatorTest {
     context.checking(new Expectations() {{
       oneOf(display).displayText("5");
     }});
-    calculator.numberPressed("5");
+    assertThat(calculator.numberPressed(5), is("5"));
   }
 
   @Test
   public void twoNumbersArePressed() {
     context.checking(new Expectations() {{
-      oneOf(display).displayText("5");
-      oneOf(display).displayText("59");
+      oneOf(display).displayText("6");
+      oneOf(display).displayText("69");
     }});
 
-    calculator.numberPressed("5");
-    calculator.numberPressed("9");
+    calculator.numberPressed(6);
+    assertThat(calculator.numberPressed(9), is("69"));
   }
 
   @Test
@@ -54,38 +54,39 @@ public class CalculatorTest {
       oneOf(display).displayText("5+");
       oneOf(display).displayText("5+8");
     }});
-    calculator.numberPressed("5");
+    calculator.numberPressed(5);
     calculator.operatorPressed("+");
-    calculator.numberPressed("8");
+    assertThat(calculator.numberPressed(8), is("5+8"));
   }
 
   @Test
   public void anotherNumberOperatorNumberArePressed() {
     context.checking(new Expectations() {{
-      oneOf(display).displayText("5");
-      oneOf(display).displayText("5*");
-      oneOf(display).displayText("5*8");
+      oneOf(display).displayText("7");
+      oneOf(display).displayText("7*");
+      oneOf(display).displayText("7*8");
     }});
-    calculator.numberPressed("5");
+    calculator.numberPressed(7);
     calculator.operatorPressed("*");
-    calculator.numberPressed("8");
+    assertThat(calculator.numberPressed(8), is("7*8"));
   }
 
   @Test
-  public void addMoreOperatorsThanOne(){
+  public void addMoreOperatorsThanOne() {
     context.checking(new Expectations() {{
-      oneOf(display).displayText("5");
-      oneOf(display).displayText("5*");
-      oneOf(display).displayText("5*");
-      oneOf(display).displayText("5*");
-      oneOf(display).displayText("5*8");
+      oneOf(display).displayText("3");
+      oneOf(display).displayText("3*");
+      oneOf(display).displayText("3*");
+      oneOf(display).displayText("3*");
+      oneOf(display).displayText("3*8");
     }});
-    calculator.numberPressed("5");
+    calculator.numberPressed(3);
     calculator.operatorPressed("*");
     calculator.operatorPressed("*");
     calculator.operatorPressed("*");
-    calculator.numberPressed("8");
+    assertThat(calculator.numberPressed(8), is("3*8"));
   }
+
   @Test
   public void sumOfTwoNumbers() {
     context.checking(new Expectations() {{
@@ -94,9 +95,9 @@ public class CalculatorTest {
       oneOf(display).displayText("5+8");
       oneOf(display).displayText("13.0");
     }});
-    calculator.numberPressed("5");
+    calculator.numberPressed(5);
     calculator.operatorPressed("+");
-    calculator.numberPressed("8");
+    calculator.numberPressed(8);
     assertThat(calculator.findResult(), is(13.0));
   }
 
@@ -110,12 +111,12 @@ public class CalculatorTest {
       oneOf(display).displayText("54+88");
       oneOf(display).displayText("142.0");
     }});
-    calculator.numberPressed("5");
-    calculator.numberPressed("4");
+    calculator.numberPressed(5);
+    calculator.numberPressed(4);
     calculator.operatorPressed("+");
-    calculator.numberPressed("8");
-    calculator.numberPressed("8");
-    assertThat(calculator.findResult(), is (142.0));
+    calculator.numberPressed(8);
+    calculator.numberPressed(8);
+    assertThat(calculator.findResult(), is(142.0));
   }
 
   @Test
@@ -131,13 +132,13 @@ public class CalculatorTest {
       oneOf(display).displayText("15.0");
     }});
 
-    calculator.numberPressed("5");
+    calculator.numberPressed(5);
     calculator.operatorPressed("+");
-    calculator.numberPressed("8");
+    calculator.numberPressed(8);
     assertThat(calculator.findResult(), is(13.0));
-    calculator.numberPressed("6");
+    calculator.numberPressed(6);
     calculator.operatorPressed("+");
-    calculator.numberPressed("9");
+    calculator.numberPressed(9);
     assertThat(calculator.findResult(), is(15.0));
   }
 
@@ -149,14 +150,14 @@ public class CalculatorTest {
       oneOf(display).displayText("8-5");
       oneOf(display).displayText("3.0");
     }});
-    calculator.numberPressed("8");
+    calculator.numberPressed(8);
     calculator.operatorPressed("-");
-    calculator.numberPressed("5");
+    calculator.numberPressed(5);
     assertThat(calculator.findResult(), is(3.0));
   }
 
   @Test
-  public void subtractTwoNumbersThenPressEqualsAndAgainSubtractTwoNumbers(){
+  public void subtractTwoNumbersThenPressEqualsAndAgainSubtractTwoNumbers() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("8");
       oneOf(display).displayText("8-");
@@ -168,33 +169,33 @@ public class CalculatorTest {
       oneOf(display).displayText("25-9");
       oneOf(display).displayText("16.0");
     }});
-    calculator.numberPressed("8");
+    calculator.numberPressed(8);
     calculator.operatorPressed("-");
-    calculator.numberPressed("5");
+    calculator.numberPressed(5);
     assertThat(calculator.findResult(), is(3.0));
-    calculator.numberPressed("2");
-    calculator.numberPressed("5");
+    calculator.numberPressed(2);
+    calculator.numberPressed(5);
     calculator.operatorPressed("-");
-    calculator.numberPressed("9");
+    calculator.numberPressed(9);
     assertThat(calculator.findResult(), is(16.0));
   }
 
   @Test
-  public void multiplyTwoNumbers(){
+  public void multiplyTwoNumbers() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("6");
       oneOf(display).displayText("6*");
       oneOf(display).displayText("6*5");
       oneOf(display).displayText("30.0");
     }});
-    calculator.numberPressed("6");
+    calculator.numberPressed(6);
     calculator.operatorPressed("*");
-    calculator.numberPressed("5");
+    calculator.numberPressed(5);
     assertThat(calculator.findResult(), is(30.0));
   }
 
   @Test
-  public void divideTwoNumbers(){
+  public void divideTwoNumbers() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("30");
@@ -203,16 +204,16 @@ public class CalculatorTest {
       oneOf(display).displayText("30/15");
       oneOf(display).displayText("2.0");
     }});
-    calculator.numberPressed("3");
-    calculator.numberPressed("0");
+    calculator.numberPressed(3);
+    calculator.numberPressed(0);
     calculator.operatorPressed("/");
-    calculator.numberPressed("1");
-    calculator.numberPressed("5");
+    calculator.numberPressed(1);
+    calculator.numberPressed(5);
     assertThat(calculator.findResult(), is(2.0));
   }
 
   @Test
-  public void buttonClearAllIsPressed(){
+  public void buttonClearAllIsPressed() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("30");
@@ -220,17 +221,19 @@ public class CalculatorTest {
       oneOf(display).displayText("30/1");
       oneOf(display).displayText("30/15");
       oneOf(display).displayText("");
+      oneOf(display).displayText("4");
     }});
-    calculator.numberPressed("3");
-    calculator.numberPressed("0");
+    calculator.numberPressed(3);
+    calculator.numberPressed(0);
     calculator.operatorPressed("/");
-    calculator.numberPressed("1");
-    calculator.numberPressed("5");
+    calculator.numberPressed(1);
+    calculator.numberPressed(5);
     calculator.clearAll();
+    assertThat(calculator.numberPressed(4), is("4"));
   }
-  
+
   @Test
-  public void sumTwoNumbersAfterClearAllButtonIsPressed(){
+  public void sumTwoNumbersAfterClearAllButtonIsPressed() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("30");
@@ -244,20 +247,20 @@ public class CalculatorTest {
       oneOf(display).displayText("15.0");
 
     }});
-    calculator.numberPressed("3");
-    calculator.numberPressed("0");
+    calculator.numberPressed(3);
+    calculator.numberPressed(0);
     calculator.operatorPressed("/");
-    calculator.numberPressed("1");
-    calculator.numberPressed("5");
+    calculator.numberPressed(1);
+    calculator.numberPressed(5);
     calculator.clearAll();
-    calculator.numberPressed("8");
+    calculator.numberPressed(8);
     calculator.operatorPressed("+");
-    calculator.numberPressed("7");
+    calculator.numberPressed(7);
     assertThat(calculator.findResult(), is(15.0));
   }
 
   @Test
-  public void buttonClearIsPressed(){
+  public void buttonClearIsPressed() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("30");
@@ -265,17 +268,19 @@ public class CalculatorTest {
       oneOf(display).displayText("30/1");
       oneOf(display).displayText("30/15");
       oneOf(display).displayText("30/1");
+      oneOf(display).displayText("30.0");
     }});
-    calculator.numberPressed("3");
-    calculator.numberPressed("0");
+    calculator.numberPressed(3);
+    calculator.numberPressed(0);
     calculator.operatorPressed("/");
-    calculator.numberPressed("1");
-    calculator.numberPressed("5");
+    calculator.numberPressed(1);
+    calculator.numberPressed(5);
     calculator.clear();
+    assertThat(calculator.findResult(), is(30.0));
   }
 
   @Test
-  public void sumTwoNumbersAfterClearButtonIsPressed(){
+  public void sumTwoNumbersAfterClearButtonIsPressed() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("30");
@@ -285,17 +290,17 @@ public class CalculatorTest {
       oneOf(display).displayText("30+1");
       oneOf(display).displayText("31.0");
     }});
-    calculator.numberPressed("3");
-    calculator.numberPressed("0");
+    calculator.numberPressed(3);
+    calculator.numberPressed(0);
     calculator.operatorPressed("+");
-    calculator.numberPressed("1");
-    calculator.numberPressed("5");
+    calculator.numberPressed(1);
+    calculator.numberPressed(5);
     calculator.clear();
     assertThat(calculator.findResult(), is(31.0));
   }
-  
+
   @Test
-  public void pressClearMoreThanNecessary(){
+  public void pressClearMoreThanNecessary() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("30");
@@ -304,31 +309,20 @@ public class CalculatorTest {
       oneOf(display).displayText("3");
       oneOf(display).displayText("");
       oneOf(display).displayText("");
+      oneOf(display).displayText("5");
     }});
-    calculator.numberPressed("3");
-    calculator.numberPressed("0");
-    calculator.numberPressed("5");
+    calculator.numberPressed(3);
+    calculator.numberPressed(0);
+    calculator.numberPressed(5);
     calculator.clear();
     calculator.clear();
     calculator.clear();
     calculator.clear();
+    assertThat(calculator.numberPressed(5), is("5"));
   }
 
-//  @Test
-//  public void pressButton0MoreThanOnceAtBeginning(){
-//    context.checking(new Expectations() {{
-//      oneOf(display).displayText("0");
-//      oneOf(display).displayText("0");
-//      oneOf(display).displayText("0");
-//    }});
-//    calculator.numberPressed("0");
-//    calculator.numberPressed("0");
-//    calculator.numberPressed("0");
-//  }
-
-
   @Test
-  public void sumOfTwoDecimalNumbers(){
+  public void sumOfTwoDecimalNumbers() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("3.");
@@ -339,18 +333,18 @@ public class CalculatorTest {
       oneOf(display).displayText("3.2+1.5");
       oneOf(display).displayText("4.7");
     }});
-    calculator.numberPressed("3");
+    calculator.numberPressed(3);
     calculator.decimalPressed(".");
-    calculator.numberPressed("2");
+    calculator.numberPressed(2);
     calculator.operatorPressed("+");
-    calculator.numberPressed("1");
+    calculator.numberPressed(1);
     calculator.decimalPressed(".");
-    calculator.numberPressed("5");
+    calculator.numberPressed(5);
     assertThat(calculator.findResult(), is(4.7));
   }
 
   @Test
-  public void decimalInvalidInput(){
+  public void decimalInvalidInput() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("3.");
@@ -358,23 +352,24 @@ public class CalculatorTest {
       oneOf(display).displayText("Error");
 
     }});
-    calculator.numberPressed("3");
+    calculator.numberPressed(3);
     calculator.decimalPressed(".");
     calculator.decimalPressed(".");
-    calculator.numberPressed("2");
+    calculator.numberPressed(2);
   }
 
   @Test
-  public void pushClearButtonToChangeTheOperator(){
-   context.checking(new Expectations(){{
-     oneOf(display).displayText("3");
-     oneOf(display).displayText("3+");
-     oneOf(display).displayText("3");
-     oneOf(display).displayText("3-");
-   }});
-    calculator.numberPressed("3");
+  public void pushClearButtonToChangeTheOperator() {
+    context.checking(new Expectations() {{
+      oneOf(display).displayText("3");
+      oneOf(display).displayText("3+");
+      oneOf(display).displayText("3");
+      oneOf(display).displayText("3-");
+    }});
+    calculator.numberPressed(3);
     calculator.operatorPressed("+");
     calculator.clear();
     calculator.operatorPressed("-");
   }
+
 }

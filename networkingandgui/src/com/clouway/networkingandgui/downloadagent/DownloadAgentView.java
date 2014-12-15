@@ -38,7 +38,7 @@ public class DownloadAgentView {
 
   private void addElementsToFrame() {
     url = new JTextField("", 60);
-//    url.setText("http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg");
+    url.setText("http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg");
     fileNameInput = new JTextField("", 20);
 
     cancel.setEnabled(false);
@@ -75,10 +75,8 @@ public class DownloadAgentView {
 
         downloadThread.start();
         progressBarThread.start();
-
       }
     };
-
   }
 
   private ActionListener ActionListenerForCancelButton(final DownloadListener downloadListener) {

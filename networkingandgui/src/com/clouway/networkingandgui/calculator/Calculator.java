@@ -19,7 +19,7 @@ public class Calculator implements CalculatorListener {
     this.display = display;
   }
 
-  public void numberPressed(String number) {
+  public String numberPressed(int number) {
     currentDisplay += number;
     if (operator.isEmpty()) {
       tempValueLeft += number;
@@ -37,6 +37,7 @@ public class Calculator implements CalculatorListener {
       }
     }
     display.displayText(currentDisplay);
+    return currentDisplay;
   }
 
   @Override

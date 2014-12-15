@@ -95,7 +95,8 @@ public class CalculatorView extends JFrame implements Display {
       public void actionPerformed(ActionEvent e) {
         for (JButton number : digits) {
           if (e.getSource() == number) {
-            calculatorListener.numberPressed(number.getText());
+
+            calculatorListener.numberPressed(Integer.parseInt(number.getText()));
           }
         }
       }

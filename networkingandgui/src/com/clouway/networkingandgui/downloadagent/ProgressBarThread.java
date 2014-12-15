@@ -18,11 +18,17 @@ public class ProgressBarThread extends Thread {
   }
 
   public void run() {
+    if (listener.getForProgressBar() == 0) {
+      try {
+        sleep(550);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    progressBar.setMaximum(listener.getForProgressBar());
     while (!downloadThread.isDead()) {
-
-      progressBar.setMaximum(listener.getForProgressBar());
-
       progressBar.setValue(listener.getTransferredBytes());
+
     }
   }
 }
