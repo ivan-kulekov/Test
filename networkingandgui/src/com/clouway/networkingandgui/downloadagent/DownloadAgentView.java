@@ -23,7 +23,7 @@ public class DownloadAgentView {
   public void initFrame(DownloadListener downloadListener) {
     addElementsToFrame();
     container.setLayout(new GridLayout(0, 2, 2, 2));
-    container.setSize(700, 200);
+    container.setSize(600, 200);
     container.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     container.setVisible(true);
 
