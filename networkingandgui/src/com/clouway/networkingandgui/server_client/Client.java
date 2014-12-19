@@ -11,18 +11,23 @@ import java.net.Socket;
  */
 public class Client {
 
-  public void connectClient(String localhost, int port) {
-    try {
+  public void connectClient(final String localhost, final int port) {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Socket socket = new Socket(localhost, port);
+          PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+          BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+          System.out.println(in.readLine());
+          out.println("The client has been connected.");
+          System.out.println("client");
+          System.out.println(in.readLine());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }).start();
 
-      Socket socket = new Socket(localhost, port);
-      PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      System.out.println(in.readLine());
-      out.println("The client has been connected.");
-      System.out.println("client");
-      System.out.println(in.readLine());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 }
