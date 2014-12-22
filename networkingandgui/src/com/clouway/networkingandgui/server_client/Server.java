@@ -18,6 +18,8 @@ public class Server {
   private boolean anotherClient;
   private Client client;
   private final Object lock = new Object();
+  private ServerSocket serverSocket;
+  private Socket clientSocket;
 
   public Server(Client client) {
 
@@ -27,36 +29,20 @@ public class Server {
     new Thread(new Runnable() {
       @Override
       public void run() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
-
         try {
-          ServerSocket serverSocket = new ServerSocket(port);
+          serverSocket = new ServerSocket(port);
           stop = false;
+          while (serverSocket.isBound()) {
 
-          while (true) {
-
-            Socket clientSocket = serverSocket.accept();
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            clientSocket = serverSocket.accept();
+//            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             out.println("Hello. The server's date is: " + dateFormat.format(date));
-            System.out.println(in.readLine());
-
-            synchronized (lock) {
-              if (!stop) {
-                try {
-                  lock.wait();
-                } catch (InterruptedException e) {
-                  e.printStackTrace();
-                }
-              }
-            }
-            System.out.println("message");
-            out.println("the server is down!");
-            clientSocket.close();
           }
         } catch (IOException e) {
-          e.printStackTrace();
+//          e.printStackTrace();
         }
       }
     }).start();
@@ -64,9 +50,33 @@ public class Server {
   }
 
   public void stopServer() {
-    synchronized (lock) {
-      stop = true;
-      lock.notifyAll();
+    stop = true;
+    try {
+      PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+      out.println("The server is stopped!");
+      serverSocket.close();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
+
+//    synchronized (lock) {
+
+//      lock.notifyAll();
+//    }
+
+
+//            synchronized (lock) {
+//              if (!stop) {
+//                try {
+//                  lock.wait();
+//                } catch (InterruptedException e) {
+//                  e.printStackTrace();
+//                }
+//              }
+//            }
+
+//            System.out.println("message");
+//            out.println("the server is down!");
+//            System.out.println(in.readLine());
 }

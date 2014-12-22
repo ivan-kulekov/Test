@@ -10,6 +10,7 @@ import java.net.Socket;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class Client {
+  private final Object lock = new Object();
 
   public void connectClient(final String localhost, final int port) {
     new Thread(new Runnable() {
