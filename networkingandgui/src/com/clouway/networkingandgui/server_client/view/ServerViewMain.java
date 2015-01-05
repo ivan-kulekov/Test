@@ -8,9 +8,9 @@ import com.clouway.networkingandgui.server_client.Server;
  */
 public class ServerViewMain {
   public static void main(String[] args) {
-    Client client = new Client();
-    Server server = new Server(client);
+
     ServerView serverView = new ServerView();
+    Server server = new Server(serverView);
     serverView.initFrame(server);
   }
 

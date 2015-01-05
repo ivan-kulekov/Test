@@ -1,5 +1,7 @@
 package com.clouway.networkingandgui.server_client;
 
+import com.clouway.networkingandgui.server_client.view.Display;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,35 +16,39 @@ import java.util.Date;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class Server {
-  private boolean stop;
-  private boolean anotherClient;
-  private Client client;
-  private final Object lock = new Object();
+//  private boolean stop;
   private ServerSocket serverSocket;
   private Socket clientSocket;
+  private Display display;
+  private boolean isStarted = false;
 
-  public Server(Client client) {
-
+  public Server(Display display) {
+    this.display = display;
   }
 
   public void startServer(final int port) {
+
+    if(isStarted){
+      throw new ServerAlreadyStartedException();
+    }
+    isStarted = true;
     new Thread(new Runnable() {
       @Override
       public void run() {
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         try {
           serverSocket = new ServerSocket(port);
-          stop = false;
-          while (serverSocket.isBound()) {
-
+//          stop = false;
+          while (true) {
             clientSocket = serverSocket.accept();
-//            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            display.show(clientSocket.getInetAddress().toString());
+//            System.out.println(display + "asd");
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             out.println("Hello. The server's date is: " + dateFormat.format(date));
           }
         } catch (IOException e) {
-//          e.printStackTrace();
         }
       }
     }).start();
@@ -50,33 +56,13 @@ public class Server {
   }
 
   public void stopServer() {
-    stop = true;
+//    stop = true;
     try {
-      PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-      out.println("The server is stopped!");
+//      PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+//      out.println("The server is stopped!");
       serverSocket.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
-
-//    synchronized (lock) {
-
-//      lock.notifyAll();
-//    }
-
-
-//            synchronized (lock) {
-//              if (!stop) {
-//                try {
-//                  lock.wait();
-//                } catch (InterruptedException e) {
-//                  e.printStackTrace();
-//                }
-//              }
-//            }
-
-//            System.out.println("message");
-//            out.println("the server is down!");
-//            System.out.println(in.readLine());
 }

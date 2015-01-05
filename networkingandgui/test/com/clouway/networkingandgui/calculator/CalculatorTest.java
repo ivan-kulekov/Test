@@ -1,7 +1,5 @@
 package com.clouway.networkingandgui.calculator;
 
-import com.clouway.networkingandgui.calculator.Calculator;
-import com.clouway.networkingandgui.calculator.Display;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;

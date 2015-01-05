@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
-public class ServerView {
+public class ServerView implements Display{
   private JFrame container = new JFrame();
   private JTextField port = new JTextField("4444");
   private JButton setParamsToServer = new JButton("Start");
@@ -29,14 +29,14 @@ public class ServerView {
       @Override
       public void actionPerformed(ActionEvent e) {
         server.startServer(portNumber);
-        textArea.setText("Server was started.\n");
+//        textArea.setText("Server was started.\n");
       }
     };
     ActionListener stop = new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         server.stopServer();
-        textArea.append("Server was stopped.\n");
+//        textArea.append("Server was stopped.\n");
       }
     };
     setParamsToServer.addActionListener(start);
@@ -50,5 +50,10 @@ public class ServerView {
     container.add(textArea);
     container.add(stopServer);
     portNumber = Integer.parseInt(port.getText());
+  }
+
+  @Override
+  public void show(String text) {
+    textArea.append(text + "\n");
   }
 }

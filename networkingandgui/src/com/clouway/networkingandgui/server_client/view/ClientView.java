@@ -16,7 +16,7 @@ public class ClientView {
   private JTextField port = new JTextField("4444");
   private JButton connectClient = new JButton("Connect");
   private JTextArea textArea = new JTextArea();
-  private JButton disconnectClient = new JButton("Disconnect");
+//  private JButton disconnectClient = new JButton("Disconnect");
   private String forLocalhost;
   private int forPort;
 
@@ -30,15 +30,21 @@ public class ClientView {
       @Override
       public void actionPerformed(ActionEvent e) {
         client.connectClient(forLocalhost, forPort);
+        try {
+          Thread.sleep(50);
+        } catch (InterruptedException e1) {
+          e1.printStackTrace();
+        }
+        textArea.append(client.getDisplay());
       }
     };
-    ActionListener disconnect = new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-//        client.disconnect();
-      }
-    };
-    disconnectClient.addActionListener(disconnect);
+//    ActionListener disconnect = new ActionListener() {
+//      @Override
+//      public void actionPerformed(ActionEvent e) {
+////        client.disconnect();
+//      }
+//    };
+//    disconnectClient.addActionListener(disconnect);
     connectClient.addActionListener(connect);
   }
 
@@ -48,7 +54,7 @@ public class ClientView {
     container.add(connectClient);
     textArea.setEditable(false);
     container.add(textArea);
-    container.add(disconnectClient);
+//    container.add(disconnectClient);
     forLocalhost = localhost.getText();
     forPort = Integer.parseInt( port.getText());
   }
