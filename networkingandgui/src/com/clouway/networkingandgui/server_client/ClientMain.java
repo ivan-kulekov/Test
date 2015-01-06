@@ -1,12 +1,15 @@
 package com.clouway.networkingandgui.server_client;
 
 
+import com.clouway.networkingandgui.server_client.view.ClientView;
+
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class ClientMain {
   public static void main(String[] args) {
-    Client client = new Client();
+    ClientView clientView = new ClientView();
+    Client client = new Client(clientView);
     client.connectClient("localhost", 4444);
   }
 }

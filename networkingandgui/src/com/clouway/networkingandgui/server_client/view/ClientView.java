@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
-public class ClientView {
+public class ClientView implements Display{
   private JFrame container = new JFrame();
   private JTextField localhost = new JTextField("localhost");
   private JTextField port = new JTextField("4444");
@@ -35,7 +35,7 @@ public class ClientView {
         } catch (InterruptedException e1) {
           e1.printStackTrace();
         }
-        textArea.append(client.getDisplay());
+        textArea.append(client.getCurrentDisplay());
       }
     };
 //    ActionListener disconnect = new ActionListener() {
@@ -57,5 +57,10 @@ public class ClientView {
 //    container.add(disconnectClient);
     forLocalhost = localhost.getText();
     forPort = Integer.parseInt( port.getText());
+  }
+
+  @Override
+  public void show(String text) {
+    textArea.append(text + "\n");
   }
 }

@@ -1,6 +1,5 @@
 package com.clouway.networkingandgui.server_client;
 
-import com.clouway.networkingandgui.server_client.view.Display;
 import com.clouway.networkingandgui.server_client.view.ServerView;
 
 /**

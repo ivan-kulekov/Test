@@ -7,8 +7,8 @@ import com.clouway.networkingandgui.server_client.Client;
  */
 public class ClientViewMain {
   public static void main(String[] args) {
-    Client client = new Client();
     ClientView clientView = new ClientView();
+    Client client = new Client(clientView);
     clientView.initFrame(client);
   }
 }

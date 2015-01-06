@@ -1,9 +1,11 @@
 package com.clouway.networkingandgui.serverclient;
 
+import com.clouway.networkingandgui.server_client.Client;
 import com.clouway.networkingandgui.server_client.Server;
 import com.clouway.networkingandgui.server_client.ServerAlreadyStartedException;
 import com.clouway.networkingandgui.server_client.view.Display;
 import org.jmock.Expectations;
+import org.jmock.States;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.jmock.lib.concurrent.Synchroniser;
@@ -27,15 +29,8 @@ public class ServerTest {
   public Synchroniser synchroniser = new Synchroniser();
 
   class FakeClient {
-    private final String host;
-    private final int port;
 
-    FakeClient(String host, int port) {
-      this.host = host;
-      this.port = port;
-    }
-
-    public void connect() {
+    public void connect(String host, int port) {
       try {
         Socket socket = new Socket(host, port);
       } catch (IOException e) {
@@ -54,34 +49,49 @@ public class ServerTest {
   @Before
   public void setUp() {
     server = new Server(display);
-    client = new FakeClient("localhost", 4444);
+    client = new FakeClient();
   }
 
-//  @After
-//  public void tearDown() throws Exception {
-//    server.stopServer();
-//  }
+  @After
+  public void tearDown() throws Exception {
+    server.stopServer();
+  }
 
   @Test
-  public void connectClient() {
+  public void connectClient() throws Exception {
     server.startServer(4444);
     context.checking(new Expectations() {{
       oneOf(display).show("/127.0.0.1");
     }});
-    client.connect();
-    server.stopServer();
+    client.connect("localhost", 4444);
   }
 
   @Test(expected = ServerAlreadyStartedException.class)
   public void startServerTwoTimesWithConnectedClient() {
     server.startServer(4444);
-    client.connect();
+    client.connect("localhost", 4444);
     server.startServer(4444);
   }
 
   @Test(expected = ServerAlreadyStartedException.class)
-  public void startServerTwoTimesWithoutClient() {
+  public void startServerTwoTimesWithoutConnectedClient() {
     server.startServer(4444);
     server.startServer(4444);
   }
+
+//  @Test
+//  public void sendMessageFromServerToClient() {
+//    Client client1 = new Client(display);
+//    server.startServer(4444);
+//    context.checking(new Expectations() {{
+//      oneOf(display).show("/127.0.0.1");
+//    }});
+//    client1.connectClient("localhost", 4444);
+//    try {
+//      Thread.sleep(100);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+//    assertThat(client1.getCurrentDisplay(), is("Hello. The server's date is: 2015/01/06"));
+//  }
 }
