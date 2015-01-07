@@ -1,11 +1,9 @@
 package com.clouway.networkingandgui.serverclient;
 
-import com.clouway.networkingandgui.server_client.Client;
 import com.clouway.networkingandgui.server_client.Server;
 import com.clouway.networkingandgui.server_client.ServerAlreadyStartedException;
 import com.clouway.networkingandgui.server_client.view.Display;
 import org.jmock.Expectations;
-import org.jmock.States;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.jmock.lib.concurrent.Synchroniser;
@@ -17,8 +15,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.Socket;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
@@ -59,24 +55,25 @@ public class ServerTest {
 
   @Test
   public void connectClient() throws Exception {
-    server.startServer(4444);
+    server.startServer(4441);
     context.checking(new Expectations() {{
       oneOf(display).show("/127.0.0.1");
     }});
-    client.connect("localhost", 4444);
+    Thread.sleep(40);
+    client.connect("localhost", 4441);
   }
 
   @Test(expected = ServerAlreadyStartedException.class)
   public void startServerTwoTimesWithConnectedClient() {
-    server.startServer(4444);
-    client.connect("localhost", 4444);
-    server.startServer(4444);
+    server.startServer(4441);
+    client.connect("localhost", 4441);
+    server.startServer(4441);
   }
 
   @Test(expected = ServerAlreadyStartedException.class)
   public void startServerTwoTimesWithoutConnectedClient() {
-    server.startServer(4444);
-    server.startServer(4444);
+    server.startServer(4441);
+    server.startServer(4441);
   }
 
 //  @Test
