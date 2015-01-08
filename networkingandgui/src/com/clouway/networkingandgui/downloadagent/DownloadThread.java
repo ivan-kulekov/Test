@@ -11,7 +11,6 @@ public class DownloadThread extends Thread {
   private boolean isDead;
 
 
-
   public DownloadThread(DownloadListener downloadListener, String urlName, String downloadedFileName) {
     this.downloadListener = downloadListener;
     this.urlName = urlName;

@@ -19,7 +19,7 @@ public class Calculator implements CalculatorListener {
     this.display = display;
   }
 
-  public String numberPressed(int number) {
+  public void onNumberPressed(int number) {
     currentDisplay += number;
     if (operator.isEmpty()) {
       tempValueLeft += number;
@@ -37,21 +37,21 @@ public class Calculator implements CalculatorListener {
       }
     }
     display.displayText(currentDisplay);
-    return currentDisplay;
+//    return currentDisplay;
   }
 
   @Override
-  public void operatorPressed(String operator) {
+  public void onOperatorPressed(String operator) {
     if (!isOperatorUsed) {
       this.operator = operator;
       currentDisplay += this.operator;
+      display.displayText(currentDisplay);
     }
-    display.displayText(currentDisplay);
     isOperatorUsed = true;
   }
 
   @Override
-  public double findResult() {
+  public double onEqualPressed() {
     if (operator.equals("+")) {
       result = left + right;
     }
@@ -72,14 +72,14 @@ public class Calculator implements CalculatorListener {
   }
 
   @Override
-  public void clearAll() {
+  public void onClearAllPressed() {
     resetValues();
     display.displayText(currentDisplay);
     isOperatorUsed = false;
   }
 
   @Override
-  public void clear() {
+  public void onClearPressed() {
     try {
       currentDisplay = currentDisplay.substring(0, currentDisplay.length() - 1);
     } catch (StringIndexOutOfBoundsException e) {
@@ -97,7 +97,7 @@ public class Calculator implements CalculatorListener {
   }
 
   @Override
-  public void decimalPressed(String dot) {
+  public void onDecimalPressed(String dot) {
     if (tempValueRight.isEmpty()) {
       tempValueLeft += dot;
     } else {

@@ -1,12 +1,13 @@
 package com.clouway.networkingandgui.downloadagent;
 
+
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class DownloadAgentMain {
   public static void main(String[] args) {
-    DownloadAgentView downloadAgent = new DownloadAgentView();
-    DownloadListener transfer = new TransferObject();
-    downloadAgent.initFrame(transfer);
+    DownloadAgentView downloadAgentView = new DownloadAgentView();
+    DownloadAgent downloadAgent = new DownloadAgent(downloadAgentView);
+    downloadAgentView.initFrame(downloadAgent);
   }
 }

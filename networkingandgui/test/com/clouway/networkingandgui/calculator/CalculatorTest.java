@@ -31,18 +31,19 @@ public class CalculatorTest {
     context.checking(new Expectations() {{
       oneOf(display).displayText("5");
     }});
-    assertThat(calculator.numberPressed(5), is("5"));
+    calculator.onNumberPressed(5);
   }
 
   @Test
-  public void twoNumbersArePressed() {
+  public void numberAfterNumber() {
     context.checking(new Expectations() {{
       oneOf(display).displayText("6");
       oneOf(display).displayText("69");
     }});
 
-    calculator.numberPressed(6);
-    assertThat(calculator.numberPressed(9), is("69"));
+    calculator.onNumberPressed(6);
+    calculator.onNumberPressed(9);
+
   }
 
   @Test
@@ -52,9 +53,9 @@ public class CalculatorTest {
       oneOf(display).displayText("5+");
       oneOf(display).displayText("5+8");
     }});
-    calculator.numberPressed(5);
-    calculator.operatorPressed("+");
-    assertThat(calculator.numberPressed(8), is("5+8"));
+    calculator.onNumberPressed(5);
+    calculator.onOperatorPressed("+");
+    calculator.onNumberPressed(8);
   }
 
   @Test
@@ -64,9 +65,9 @@ public class CalculatorTest {
       oneOf(display).displayText("7*");
       oneOf(display).displayText("7*8");
     }});
-    calculator.numberPressed(7);
-    calculator.operatorPressed("*");
-    assertThat(calculator.numberPressed(8), is("7*8"));
+    calculator.onNumberPressed(7);
+    calculator.onOperatorPressed("*");
+    calculator.onNumberPressed(8);
   }
 
   @Test
@@ -74,15 +75,13 @@ public class CalculatorTest {
     context.checking(new Expectations() {{
       oneOf(display).displayText("3");
       oneOf(display).displayText("3*");
-      oneOf(display).displayText("3*");
-      oneOf(display).displayText("3*");
       oneOf(display).displayText("3*8");
     }});
-    calculator.numberPressed(3);
-    calculator.operatorPressed("*");
-    calculator.operatorPressed("*");
-    calculator.operatorPressed("*");
-    assertThat(calculator.numberPressed(8), is("3*8"));
+    calculator.onNumberPressed(3);
+    calculator.onOperatorPressed("*");
+    calculator.onOperatorPressed("*");
+    calculator.onOperatorPressed("*");
+    calculator.onNumberPressed(8);
   }
 
   @Test
@@ -93,10 +92,10 @@ public class CalculatorTest {
       oneOf(display).displayText("5+8");
       oneOf(display).displayText("13.0");
     }});
-    calculator.numberPressed(5);
-    calculator.operatorPressed("+");
-    calculator.numberPressed(8);
-    assertThat(calculator.findResult(), is(13.0));
+    calculator.onNumberPressed(5);
+    calculator.onOperatorPressed("+");
+    calculator.onNumberPressed(8);
+    assertThat(calculator.onEqualPressed(), is(13.0));
   }
 
   @Test
@@ -109,12 +108,12 @@ public class CalculatorTest {
       oneOf(display).displayText("54+88");
       oneOf(display).displayText("142.0");
     }});
-    calculator.numberPressed(5);
-    calculator.numberPressed(4);
-    calculator.operatorPressed("+");
-    calculator.numberPressed(8);
-    calculator.numberPressed(8);
-    assertThat(calculator.findResult(), is(142.0));
+    calculator.onNumberPressed(5);
+    calculator.onNumberPressed(4);
+    calculator.onOperatorPressed("+");
+    calculator.onNumberPressed(8);
+    calculator.onNumberPressed(8);
+    assertThat(calculator.onEqualPressed(), is(142.0));
   }
 
   @Test
@@ -130,14 +129,14 @@ public class CalculatorTest {
       oneOf(display).displayText("15.0");
     }});
 
-    calculator.numberPressed(5);
-    calculator.operatorPressed("+");
-    calculator.numberPressed(8);
-    assertThat(calculator.findResult(), is(13.0));
-    calculator.numberPressed(6);
-    calculator.operatorPressed("+");
-    calculator.numberPressed(9);
-    assertThat(calculator.findResult(), is(15.0));
+    calculator.onNumberPressed(5);
+    calculator.onOperatorPressed("+");
+    calculator.onNumberPressed(8);
+    assertThat(calculator.onEqualPressed(), is(13.0));
+    calculator.onNumberPressed(6);
+    calculator.onOperatorPressed("+");
+    calculator.onNumberPressed(9);
+    assertThat(calculator.onEqualPressed(), is(15.0));
   }
 
   @Test
@@ -148,10 +147,10 @@ public class CalculatorTest {
       oneOf(display).displayText("8-5");
       oneOf(display).displayText("3.0");
     }});
-    calculator.numberPressed(8);
-    calculator.operatorPressed("-");
-    calculator.numberPressed(5);
-    assertThat(calculator.findResult(), is(3.0));
+    calculator.onNumberPressed(8);
+    calculator.onOperatorPressed("-");
+    calculator.onNumberPressed(5);
+    assertThat(calculator.onEqualPressed(), is(3.0));
   }
 
   @Test
@@ -167,15 +166,15 @@ public class CalculatorTest {
       oneOf(display).displayText("25-9");
       oneOf(display).displayText("16.0");
     }});
-    calculator.numberPressed(8);
-    calculator.operatorPressed("-");
-    calculator.numberPressed(5);
-    assertThat(calculator.findResult(), is(3.0));
-    calculator.numberPressed(2);
-    calculator.numberPressed(5);
-    calculator.operatorPressed("-");
-    calculator.numberPressed(9);
-    assertThat(calculator.findResult(), is(16.0));
+    calculator.onNumberPressed(8);
+    calculator.onOperatorPressed("-");
+    calculator.onNumberPressed(5);
+    assertThat(calculator.onEqualPressed(), is(3.0));
+    calculator.onNumberPressed(2);
+    calculator.onNumberPressed(5);
+    calculator.onOperatorPressed("-");
+    calculator.onNumberPressed(9);
+    assertThat(calculator.onEqualPressed(), is(16.0));
   }
 
   @Test
@@ -186,10 +185,10 @@ public class CalculatorTest {
       oneOf(display).displayText("6*5");
       oneOf(display).displayText("30.0");
     }});
-    calculator.numberPressed(6);
-    calculator.operatorPressed("*");
-    calculator.numberPressed(5);
-    assertThat(calculator.findResult(), is(30.0));
+    calculator.onNumberPressed(6);
+    calculator.onOperatorPressed("*");
+    calculator.onNumberPressed(5);
+    assertThat(calculator.onEqualPressed(), is(30.0));
   }
 
   @Test
@@ -202,12 +201,12 @@ public class CalculatorTest {
       oneOf(display).displayText("30/15");
       oneOf(display).displayText("2.0");
     }});
-    calculator.numberPressed(3);
-    calculator.numberPressed(0);
-    calculator.operatorPressed("/");
-    calculator.numberPressed(1);
-    calculator.numberPressed(5);
-    assertThat(calculator.findResult(), is(2.0));
+    calculator.onNumberPressed(3);
+    calculator.onNumberPressed(0);
+    calculator.onOperatorPressed("/");
+    calculator.onNumberPressed(1);
+    calculator.onNumberPressed(5);
+    assertThat(calculator.onEqualPressed(), is(2.0));
   }
 
   @Test
@@ -221,13 +220,13 @@ public class CalculatorTest {
       oneOf(display).displayText("");
       oneOf(display).displayText("4");
     }});
-    calculator.numberPressed(3);
-    calculator.numberPressed(0);
-    calculator.operatorPressed("/");
-    calculator.numberPressed(1);
-    calculator.numberPressed(5);
-    calculator.clearAll();
-    assertThat(calculator.numberPressed(4), is("4"));
+    calculator.onNumberPressed(3);
+    calculator.onNumberPressed(0);
+    calculator.onOperatorPressed("/");
+    calculator.onNumberPressed(1);
+    calculator.onNumberPressed(5);
+    calculator.onClearAllPressed();
+    calculator.onNumberPressed(4);
   }
 
   @Test
@@ -245,16 +244,16 @@ public class CalculatorTest {
       oneOf(display).displayText("15.0");
 
     }});
-    calculator.numberPressed(3);
-    calculator.numberPressed(0);
-    calculator.operatorPressed("/");
-    calculator.numberPressed(1);
-    calculator.numberPressed(5);
-    calculator.clearAll();
-    calculator.numberPressed(8);
-    calculator.operatorPressed("+");
-    calculator.numberPressed(7);
-    assertThat(calculator.findResult(), is(15.0));
+    calculator.onNumberPressed(3);
+    calculator.onNumberPressed(0);
+    calculator.onOperatorPressed("/");
+    calculator.onNumberPressed(1);
+    calculator.onNumberPressed(5);
+    calculator.onClearAllPressed();
+    calculator.onNumberPressed(8);
+    calculator.onOperatorPressed("+");
+    calculator.onNumberPressed(7);
+    assertThat(calculator.onEqualPressed(), is(15.0));
   }
 
   @Test
@@ -268,13 +267,13 @@ public class CalculatorTest {
       oneOf(display).displayText("30/1");
       oneOf(display).displayText("30.0");
     }});
-    calculator.numberPressed(3);
-    calculator.numberPressed(0);
-    calculator.operatorPressed("/");
-    calculator.numberPressed(1);
-    calculator.numberPressed(5);
-    calculator.clear();
-    assertThat(calculator.findResult(), is(30.0));
+    calculator.onNumberPressed(3);
+    calculator.onNumberPressed(0);
+    calculator.onOperatorPressed("/");
+    calculator.onNumberPressed(1);
+    calculator.onNumberPressed(5);
+    calculator.onClearPressed();
+    assertThat(calculator.onEqualPressed(), is(30.0));
   }
 
   @Test
@@ -288,13 +287,13 @@ public class CalculatorTest {
       oneOf(display).displayText("30+1");
       oneOf(display).displayText("31.0");
     }});
-    calculator.numberPressed(3);
-    calculator.numberPressed(0);
-    calculator.operatorPressed("+");
-    calculator.numberPressed(1);
-    calculator.numberPressed(5);
-    calculator.clear();
-    assertThat(calculator.findResult(), is(31.0));
+    calculator.onNumberPressed(3);
+    calculator.onNumberPressed(0);
+    calculator.onOperatorPressed("+");
+    calculator.onNumberPressed(1);
+    calculator.onNumberPressed(5);
+    calculator.onClearPressed();
+    assertThat(calculator.onEqualPressed(), is(31.0));
   }
 
   @Test
@@ -309,14 +308,14 @@ public class CalculatorTest {
       oneOf(display).displayText("");
       oneOf(display).displayText("5");
     }});
-    calculator.numberPressed(3);
-    calculator.numberPressed(0);
-    calculator.numberPressed(5);
-    calculator.clear();
-    calculator.clear();
-    calculator.clear();
-    calculator.clear();
-    assertThat(calculator.numberPressed(5), is("5"));
+    calculator.onNumberPressed(3);
+    calculator.onNumberPressed(0);
+    calculator.onNumberPressed(5);
+    calculator.onClearPressed();
+    calculator.onClearPressed();
+    calculator.onClearPressed();
+    calculator.onClearPressed();
+    calculator.onNumberPressed(5);
   }
 
   @Test
@@ -331,14 +330,14 @@ public class CalculatorTest {
       oneOf(display).displayText("3.2+1.5");
       oneOf(display).displayText("4.7");
     }});
-    calculator.numberPressed(3);
-    calculator.decimalPressed(".");
-    calculator.numberPressed(2);
-    calculator.operatorPressed("+");
-    calculator.numberPressed(1);
-    calculator.decimalPressed(".");
-    calculator.numberPressed(5);
-    assertThat(calculator.findResult(), is(4.7));
+    calculator.onNumberPressed(3);
+    calculator.onDecimalPressed(".");
+    calculator.onNumberPressed(2);
+    calculator.onOperatorPressed("+");
+    calculator.onNumberPressed(1);
+    calculator.onDecimalPressed(".");
+    calculator.onNumberPressed(5);
+    assertThat(calculator.onEqualPressed(), is(4.7));
   }
 
   @Test
@@ -350,10 +349,10 @@ public class CalculatorTest {
       oneOf(display).displayText("Error");
 
     }});
-    calculator.numberPressed(3);
-    calculator.decimalPressed(".");
-    calculator.decimalPressed(".");
-    calculator.numberPressed(2);
+    calculator.onNumberPressed(3);
+    calculator.onDecimalPressed(".");
+    calculator.onDecimalPressed(".");
+    calculator.onNumberPressed(2);
   }
 
   @Test
@@ -364,10 +363,10 @@ public class CalculatorTest {
       oneOf(display).displayText("3");
       oneOf(display).displayText("3-");
     }});
-    calculator.numberPressed(3);
-    calculator.operatorPressed("+");
-    calculator.clear();
-    calculator.operatorPressed("-");
+    calculator.onNumberPressed(3);
+    calculator.onOperatorPressed("+");
+    calculator.onClearPressed();
+    calculator.onOperatorPressed("-");
   }
 
 }

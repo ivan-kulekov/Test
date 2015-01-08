@@ -4,14 +4,14 @@ package com.clouway.networkingandgui.calculator;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public interface CalculatorListener {
-  String numberPressed(int number);
-  void operatorPressed(String text);
+  void onNumberPressed(int number);
+  void onOperatorPressed(String text);
 
-  double findResult();
+  double onEqualPressed();
 
-  void clearAll();
+  void onClearAllPressed();
 
-  void clear();
+  void onClearPressed();
 
-  void decimalPressed(String dot);
+  void onDecimalPressed(String dot);
 }

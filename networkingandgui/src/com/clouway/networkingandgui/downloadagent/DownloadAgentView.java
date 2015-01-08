@@ -1,5 +1,6 @@
 package com.clouway.networkingandgui.downloadagent;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +9,7 @@ import java.awt.event.ActionListener;
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
-public class DownloadAgentView {
+public class DownloadAgentView implements ProgressListener{
   private JFrame container = new JFrame();
   private JProgressBar progressBar = new JProgressBar();
   private JButton download = new JButton("Download");
@@ -71,10 +72,10 @@ public class DownloadAgentView {
 
         DownloadThread downloadThread = new DownloadThread(downloadListener, urlName, downloadedFileName);
 
-        ProgressBarThread progressBarThread = new ProgressBarThread(downloadListener, downloadThread, progressBar);
+//        ProgressBarThread progressBarThread = new ProgressBarThread(downloadListener, downloadThread, progressBar);
 
         downloadThread.start();
-        progressBarThread.start();
+//        progressBarThread.start();
       }
     };
   }
@@ -90,5 +91,10 @@ public class DownloadAgentView {
         url.setEditable(true);
       }
     };
+  }
+
+  @Override
+  public void update(int value) {
+    progressBar.setValue(value);
   }
 }

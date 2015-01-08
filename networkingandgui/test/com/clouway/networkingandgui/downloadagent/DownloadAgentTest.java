@@ -4,13 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -42,32 +35,32 @@ public class DownloadAgentTest {
 //    assertThat(transferObject.getTransferredBytes(), is(fileSize));
 //  }
 
-  @Test
-  public void noUrl() {
-    TransferObject transferObject = new TransferObject();
-    String urlName = "";
-    String downloadedFileName = "asdf.jpg";
-    transferObject.startDownload(urlName, downloadedFileName);
-    assertThat(transferObject.getTransferredBytes(), is(0));
-  }
-
-  @Test
-  public void noFileName() {
-    TransferObject transferObject = new TransferObject();
-    String urlName = "http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg";
-    String downloadedFileName = "";
-    transferObject.startDownload(urlName, downloadedFileName);
-    assertThat(transferObject.getTransferredBytes(), is(0));
-  }
-
-  @Test
-  public void invalidUrl() {
-    TransferObject transferObject = new TransferObject();
-    String urlName = "http://amydrewthompson.com/wp-contnt/uploads/2011/02/burnout_full1.jpg";
-    String downloadedFileName = "asdfgh.jpg";
-    transferObject.startDownload(urlName, downloadedFileName);
-    assertThat(transferObject.getTransferredBytes(), is(0));
-  }
+//  @Test
+//  public void noUrl() {
+//    DownloadAgent downloadAgent = new DownloadAgent();
+//    String urlName = "";
+//    String downloadedFileName = "asdf.jpg";
+//    downloadAgent.startDownload(urlName, downloadedFileName);
+//    assertThat(downloadAgent.getTransferredBytes(), is(0));
+//  }
+//
+//  @Test
+//  public void noFileName() {
+//    DownloadAgent downloadAgent = new DownloadAgent();
+//    String urlName = "http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg";
+//    String downloadedFileName = "";
+//    downloadAgent.startDownload(urlName, downloadedFileName);
+//    assertThat(downloadAgent.getTransferredBytes(), is(0));
+//  }
+//
+//  @Test
+//  public void invalidUrl() {
+//    DownloadAgent downloadAgent = new DownloadAgent();
+//    String urlName = "http://amydrewthompson.com/wp-contnt/uploads/2011/02/burnout_full1.jpg";
+//    String downloadedFileName = "asdfgh.jpg";
+//    downloadAgent.startDownload(urlName, downloadedFileName);
+//    assertThat(downloadAgent.getTransferredBytes(), is(0));
+//  }
 
 
 }

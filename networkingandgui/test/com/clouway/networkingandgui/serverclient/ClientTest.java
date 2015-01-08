@@ -1,7 +1,6 @@
 package com.clouway.networkingandgui.serverclient;
 
-import com.clouway.networkingandgui.server_client.Client;
-import com.clouway.networkingandgui.server_client.view.Display;
+import com.clouway.networkingandgui.serverclient.view.Display;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;

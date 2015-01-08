@@ -67,7 +67,7 @@ public class CalculatorView extends JFrame implements Display {
     ActionListener equalListener = new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        calculatorListener.findResult();
+        calculatorListener.onEqualPressed();
       }
     };
     buttonEqual.addActionListener(equalListener);
@@ -79,7 +79,7 @@ public class CalculatorView extends JFrame implements Display {
       public void actionPerformed(ActionEvent e) {
         for (JButton operator : operators) {
           if (e.getSource() == operator) {
-            calculatorListener.operatorPressed(operator.getText());
+            calculatorListener.onOperatorPressed(operator.getText());
           }
         }
       }
@@ -96,7 +96,7 @@ public class CalculatorView extends JFrame implements Display {
         for (JButton number : digits) {
           if (e.getSource() == number) {
 
-            calculatorListener.numberPressed(Integer.parseInt(number.getText()));
+            calculatorListener.onNumberPressed(Integer.parseInt(number.getText()));
           }
         }
       }
@@ -110,7 +110,7 @@ public class CalculatorView extends JFrame implements Display {
     ActionListener clearAllListener = new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        calculatorListener.clearAll();
+        calculatorListener.onClearAllPressed();
       }
     };
     buttonClearAll.addActionListener(clearAllListener);
@@ -120,7 +120,7 @@ public class CalculatorView extends JFrame implements Display {
     ActionListener clearListener = new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        calculatorListener.clear();
+        calculatorListener.onClearPressed();
       }
     };
     buttonClear.addActionListener(clearListener);
@@ -130,7 +130,7 @@ public class CalculatorView extends JFrame implements Display {
     ActionListener decimalListener = new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        calculatorListener.decimalPressed(buttonDecimal.getText());
+        calculatorListener.onDecimalPressed(buttonDecimal.getText());
       }
     };
     buttonDecimal.addActionListener(decimalListener);
