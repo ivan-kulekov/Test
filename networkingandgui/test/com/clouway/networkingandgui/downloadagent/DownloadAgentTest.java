@@ -49,6 +49,7 @@ public class DownloadAgentTest {
       oneOf(progressListener).update(100);
     }});
 
+
     downloadAgent.startDownload(urlName, tempFile.getAbsolutePath());
   }
 
@@ -57,9 +58,6 @@ public class DownloadAgentTest {
     DownloadAgent downloadAgent = new DownloadAgent(progressListener);
     String urlName = "";
     String downloadedFileName = "asdf.jpg";
-    context.checking(new Expectations(){{
-      oneOf(progressListener).update(0);
-    }});
     downloadAgent.startDownload(urlName, downloadedFileName);
   }
 
@@ -68,9 +66,6 @@ public class DownloadAgentTest {
     DownloadAgent downloadAgent = new DownloadAgent(progressListener);
     String urlName = "http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg";
     String downloadedFileName = "";
-    context.checking(new Expectations(){{
-      oneOf(progressListener).update(0);
-    }});
     downloadAgent.startDownload(urlName, downloadedFileName);
   }
 
@@ -78,10 +73,7 @@ public class DownloadAgentTest {
   public void invalidUrl() {
     DownloadAgent downloadAgent = new DownloadAgent(progressListener);
     String urlName = "http://amydrewthompson.com/wp-contnt/uploads/2011/02/burnout_full1.jpg";
-    String downloadedFileName = "asdfgh.jpg";
-    context.checking(new Expectations(){{
-      oneOf(progressListener).update(0);
-    }});
+    String downloadedFileName = "asdfgh.jpg";;
     downloadAgent.startDownload(urlName, downloadedFileName);
   }
 

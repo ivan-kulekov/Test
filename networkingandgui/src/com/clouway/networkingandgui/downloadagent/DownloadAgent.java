@@ -52,21 +52,10 @@ public class DownloadAgent implements DownloadListener {
     return false;
   }
 
-//  @Override
-//  public int getTransferredBytes() {
-//    return transferredBytes;
-//  }
-
-//  @Override
-//  public int getForProgressBar() {
-//    return totalBytes;
-//  }
-
   private int transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException {
     int size;
     int transferredBytes = 0;
     isInterrupted = false;
-    int step = 0;
 
     if (numberOfBytes >= 0) {
       size = numberOfBytes;
@@ -80,8 +69,6 @@ public class DownloadAgent implements DownloadListener {
     while ((readBytes = in.read(buffer)) != -1) {
       transferredBytes += readBytes;
       progressListener.update(transferredBytes * 100 / totalBytes);
-      step++;
-      System.out.println(step);
       out.write(buffer, 0, readBytes);
       if (numberOfBytes == readBytes || isInterrupted) {
         break;

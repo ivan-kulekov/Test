@@ -29,18 +29,21 @@ public class LearnNumberFormat {
 
     LearnGuava guava = new LearnGuava();
     try {
-      guava.run();
-      System.out.println("asd");
+      System.out.println(guava.state() + " start");
+      guava.startAsync();
+//      guava.run();
+      System.out.println(guava.state() + " stop");
     } catch (Exception e) {
       e.printStackTrace();
     }
-//    try {
-//      Thread.sleep(1000);
-//    } catch (InterruptedException e) {
-//      e.printStackTrace();
-//    }
     try {
-      guava.shutDown();
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    try {
+      guava.stopAsync();
+      System.out.println(guava.state()+ " asd");
     } catch (Exception e) {
       e.printStackTrace();
     }
