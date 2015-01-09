@@ -1,8 +1,14 @@
 package com.clouway.networkingandgui.downloadagent;
 
+import org.jmock.Expectations;
+import org.jmock.auto.Mock;
+import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+
+import java.io.File;
+import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,53 +20,69 @@ public class DownloadAgentTest {
 
   @Rule
   public TemporaryFolder folder = new TemporaryFolder();
+  public JUnitRuleMockery context = new JUnitRuleMockery();
+  ProgressListener progressListener = context.mock(ProgressListener.class);
 
-//  @Test
-//  public void downloadPicture() throws IOException {
-//    TransferObject transferObject = new TransferObject();
-//    String urlName = "http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg";
-//    File tempFile = folder.newFile("asd.jpg");
-//    transferObject.startDownload(urlName, tempFile.getAbsolutePath());
-//    int fileSize = (int) tempFile.length();
-//    assertThat(transferObject.getTransferredBytes(), is(fileSize));
-//  }
+  @Test
+  public void downloadFile() throws IOException {
+    String urlName = "file:testDownloadAgent.txt";
+    File tempFile = folder.newFile("asd.txt");
+    DownloadAgent downloadAgent = new DownloadAgent(progressListener);
+    context.checking(new Expectations() {{
+      oneOf(progressListener).update(0);
+      oneOf(progressListener).update(50);
+      oneOf(progressListener).update(100);
+    }});
 
-//  @Test
-//  public void download5MbFile() throws IOException {
-//    TransferObject transferObject = new TransferObject();
-//    String urlName = "http://www.wswd.net/testdownloadfiles/5MB.zip";
-//    File tempFile = folder.newFile("asd.zip");
-//    transferObject.startDownload(urlName, tempFile.getAbsolutePath());
-//    int fileSize = (int) tempFile.length();
-//    assertThat(transferObject.getTransferredBytes(), is(fileSize));
-//  }
+    downloadAgent.startDownload(urlName, tempFile.getAbsolutePath());
+  }
 
-//  @Test
-//  public void noUrl() {
-//    DownloadAgent downloadAgent = new DownloadAgent();
-//    String urlName = "";
-//    String downloadedFileName = "asdf.jpg";
-//    downloadAgent.startDownload(urlName, downloadedFileName);
-//    assertThat(downloadAgent.getTransferredBytes(), is(0));
-//  }
-//
-//  @Test
-//  public void noFileName() {
-//    DownloadAgent downloadAgent = new DownloadAgent();
-//    String urlName = "http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg";
-//    String downloadedFileName = "";
-//    downloadAgent.startDownload(urlName, downloadedFileName);
-//    assertThat(downloadAgent.getTransferredBytes(), is(0));
-//  }
-//
-//  @Test
-//  public void invalidUrl() {
-//    DownloadAgent downloadAgent = new DownloadAgent();
-//    String urlName = "http://amydrewthompson.com/wp-contnt/uploads/2011/02/burnout_full1.jpg";
-//    String downloadedFileName = "asdfgh.jpg";
-//    downloadAgent.startDownload(urlName, downloadedFileName);
-//    assertThat(downloadAgent.getTransferredBytes(), is(0));
-//  }
+  @Test
+  public void downloadAnotherFile() throws IOException {
+    String urlName = "file:asdf.txt";
+    File tempFile = folder.newFile("asdf.txt");
+    DownloadAgent downloadAgent = new DownloadAgent(progressListener);
+    context.checking(new Expectations() {{
+      oneOf(progressListener).update(0);
+      oneOf(progressListener).update(40);
+      oneOf(progressListener).update(81);
+      oneOf(progressListener).update(100);
+    }});
 
+    downloadAgent.startDownload(urlName, tempFile.getAbsolutePath());
+  }
+
+  @Test
+  public void noUrl() {
+    DownloadAgent downloadAgent = new DownloadAgent(progressListener);
+    String urlName = "";
+    String downloadedFileName = "asdf.jpg";
+    context.checking(new Expectations(){{
+      oneOf(progressListener).update(0);
+    }});
+    downloadAgent.startDownload(urlName, downloadedFileName);
+  }
+
+  @Test
+  public void noFileName() {
+    DownloadAgent downloadAgent = new DownloadAgent(progressListener);
+    String urlName = "http://amydrewthompson.com/wp-content/uploads/2011/02/burnout_full1.jpg";
+    String downloadedFileName = "";
+    context.checking(new Expectations(){{
+      oneOf(progressListener).update(0);
+    }});
+    downloadAgent.startDownload(urlName, downloadedFileName);
+  }
+
+  @Test
+  public void invalidUrl() {
+    DownloadAgent downloadAgent = new DownloadAgent(progressListener);
+    String urlName = "http://amydrewthompson.com/wp-contnt/uploads/2011/02/burnout_full1.jpg";
+    String downloadedFileName = "asdfgh.jpg";
+    context.checking(new Expectations(){{
+      oneOf(progressListener).update(0);
+    }});
+    downloadAgent.startDownload(urlName, downloadedFileName);
+  }
 
 }

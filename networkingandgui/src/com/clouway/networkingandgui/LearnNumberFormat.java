@@ -45,4 +45,5 @@ public class LearnNumberFormat {
       e.printStackTrace();
     }
   }
+
 }

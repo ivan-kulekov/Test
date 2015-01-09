@@ -13,10 +13,9 @@ import java.net.URLConnection;
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
  */
 public class DownloadAgent implements DownloadListener {
-  private static final int SIZE = 102400;
-  private int total = 0;
+  private static final int SIZE = 2048;
   private boolean isInterrupted;
-  private int forProgressBar = 0;
+  private int totalBytes = 0;
   private boolean isErrorOccurred;
   private ProgressListener progressListener;
 
@@ -38,7 +37,7 @@ public class DownloadAgent implements DownloadListener {
     try {
       URL url = new URI(urlName).toURL();
       URLConnection connection = url.openConnection();
-      forProgressBar = connection.getContentLength();
+      totalBytes = connection.getContentLength();
       InputStream in = connection.getInputStream();
       FileOutputStream outputStream = new FileOutputStream(downloadedFileName);
       if (!isErrorOccurred) {
@@ -55,18 +54,19 @@ public class DownloadAgent implements DownloadListener {
 
 //  @Override
 //  public int getTransferredBytes() {
-//    return total;
+//    return transferredBytes;
 //  }
 
 //  @Override
 //  public int getForProgressBar() {
-//    return forProgressBar;
+//    return totalBytes;
 //  }
 
   private int transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException {
     int size;
-    total = 0;
+    int transferredBytes = 0;
     isInterrupted = false;
+    int step = 0;
 
     if (numberOfBytes >= 0) {
       size = numberOfBytes;
@@ -78,14 +78,15 @@ public class DownloadAgent implements DownloadListener {
     in.skip(offset);
     int readBytes;
     while ((readBytes = in.read(buffer)) != -1) {
-      total += readBytes;
-      progressListener.update(total * 100 / forProgressBar);
-      System.out.println("asd");
+      transferredBytes += readBytes;
+      progressListener.update(transferredBytes * 100 / totalBytes);
+      step++;
+      System.out.println(step);
       out.write(buffer, 0, readBytes);
       if (numberOfBytes == readBytes || isInterrupted) {
         break;
       }
     }
-    return total;
+    return transferredBytes;
   }
 }
