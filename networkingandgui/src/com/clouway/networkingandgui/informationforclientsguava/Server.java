@@ -1,14 +1,14 @@
-package com.clouway.networkingandgui.testing;
+package com.clouway.networkingandgui.informationforclientsguava;
 
 import com.google.common.util.concurrent.AbstractExecutionThreadService;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
@@ -17,15 +17,18 @@ public class Server extends AbstractExecutionThreadService {
   private Display display;
   private int clientCounter;
   private ServerSocket serverSocket;
-  private Map<Integer, Socket> clientContainer = new Hashtable<Integer, Socket>();
+  private List<Socket> clientList = new ArrayList<Socket>();
 
   public Server(Display display) {
     this.display = display;
   }
 
+  public List<Socket> getClientList() {
+    return clientList;
+  }
+
   @Override
   protected void run() throws Exception {
-    int maxSizeOfClientsList;
     serverSocket = new ServerSocket(4444);
     while (isRunning()) {
       try {
@@ -33,35 +36,41 @@ public class Server extends AbstractExecutionThreadService {
         clientIncrease();
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
         out.println("Your client number is: " + clientCounter);
-        clientContainer.put(clientCounter, clientSocket);
-        maxSizeOfClientsList = clientContainer.size();
+        synchronized (clientList) {
+          clientList.add(clientSocket);
+        }
         display.show("Client number " + clientCounter + " has been connected!");
-      }catch (SocketException se){
-        System.out.println("Socket was closed so exiting");
+        if (clientList.size() > 1) {
+          response();
+        }
+      } catch (SocketException e) {
         break;
       }
     }
   }
 
+  private void response() throws IOException {
+    for (Socket s : clientList) {
+      PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+      out.println("Client with number " + clientCounter + " has been connected");
+    }
+  }
+
   @Override
   protected void shutDown() throws Exception {
-    if (serverSocket != null){
+    if (serverSocket != null) {
       serverSocket.close();
     }
     super.shutDown();
 
   }
 
-  @Override
-  protected void triggerShutdown() {
-    super.triggerShutdown();
-  }
 
-  private void clientIncrease(){
+  private void clientIncrease() {
     clientCounter++;
   }
 
   public int containerSize() {
-    return clientContainer.size();
+    return clientList.size();
   }
 }

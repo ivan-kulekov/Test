@@ -1,4 +1,4 @@
-package com.clouway.networkingandgui.testing;
+package com.clouway.networkingandgui.serverclientguava;
 
 /**
  * @author Dimitar Dimitrov <dimitar.dimitrov045@gmail.com>
