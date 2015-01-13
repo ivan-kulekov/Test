@@ -43,8 +43,8 @@ public class ServerTest {
   Display display;
 
   @Before
-  public void setUp() throws Exception {
-    server = new Server(display);
+  public void setUp() {
+    server = new Server(display, 4444);
     client = new FakeClient("localhost", 4444);
     server.startAsync();
     server.awaitRunning();
@@ -57,27 +57,28 @@ public class ServerTest {
   }
 
   @Test
-  public void connectClientToServer() throws Exception {
+  public void connectClientToServer() {
     context.checking(new Expectations() {{
-      oneOf(display).show("Client has been connected");
+      oneOf(display).show("Client has been connected\n");
     }});
     client.startAsync().awaitTerminated();
   }
 
 
   @Test
-  public void connectTwoClientsToServer() throws Exception {
+  public void connectTwoClientsToServer() throws InterruptedException {
     FakeClient client1 = new FakeClient("localhost", 4444);
     context.checking(new Expectations() {{
-      oneOf(display).show("Client has been connected");
-      oneOf(display).show("Client has been connected");
+      oneOf(display).show("Client has been connected\n");
+      oneOf(display).show("Client has been connected\n");
     }});
     client.startAsync().awaitTerminated();
+    Thread.sleep(10);
     client1.startAsync().awaitTerminated();
   }
 
   @Test(expected = IllegalStateException.class)
-  public void startServerTwoTimes(){
-   server.startAsync();
+  public void startServerTwoTimes() {
+    server.startAsync();
   }
 }

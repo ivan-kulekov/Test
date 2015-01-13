@@ -13,8 +13,20 @@ public class Main {
     };
     Server server = new Server(display);
     Client client = new Client(display, "localhost", 4444, server.getClientList());
+    Client client1 = new Client(display, "localhost", 4444, server.getClientList());
     server.startAsync();
     server.awaitRunning();
-
+    client.startAsync().awaitTerminated();
+    client1.startAsync().awaitTerminated();
+    try {
+      Thread.sleep(20000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    try {
+      server.shutDown();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
